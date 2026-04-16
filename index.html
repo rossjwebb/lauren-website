@@ -110,9 +110,61 @@
       background: #e8e2da;
     }
 
+    .video-card {
+      position: relative;
+    }
+
     .video-card video {
       width: 100%;
       display: block;
+    }
+
+    .video-card .poster-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      cursor: pointer;
+      display: block;
+    }
+
+    .video-card .poster-overlay.hidden {
+      display: none;
+    }
+
+    .video-card .play-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 64px;
+      height: 64px;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 50%;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .video-card:hover .play-btn {
+      background: rgba(0, 0, 0, 0.7);
+    }
+
+    .video-card .play-btn::after {
+      content: '';
+      display: block;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 12px 0 12px 22px;
+      border-color: transparent transparent transparent white;
+      margin-left: 4px;
+    }
+
+    .video-card .poster-overlay.hidden + .play-btn {
+      display: none;
     }
 
     .video-card .card-caption {
@@ -243,22 +295,32 @@
   <div class="video-grid">
     <div class="video-card">
       <video src="fish-1.mov" controls playsinline preload="metadata"></video>
+      <canvas class="poster-overlay"></canvas>
+      <div class="play-btn"></div>
       <div class="card-caption"><h3>Fish I</h3></div>
     </div>
     <div class="video-card">
       <video src="fish-2.mov" controls playsinline preload="metadata"></video>
+      <canvas class="poster-overlay"></canvas>
+      <div class="play-btn"></div>
       <div class="card-caption"><h3>Fish II</h3></div>
     </div>
     <div class="video-card">
       <video src="fish-3.mov" controls playsinline preload="metadata"></video>
+      <canvas class="poster-overlay"></canvas>
+      <div class="play-btn"></div>
       <div class="card-caption"><h3>Fish III</h3></div>
     </div>
     <div class="video-card">
       <video src="fishing-guy.mov" controls playsinline preload="metadata"></video>
+      <canvas class="poster-overlay"></canvas>
+      <div class="play-btn"></div>
       <div class="card-caption"><h3>Fishing Guy</h3></div>
     </div>
     <div class="video-card">
       <video src="sculpture.mov" controls playsinline preload="metadata"></video>
+      <canvas class="poster-overlay"></canvas>
+      <div class="play-btn"></div>
       <div class="card-caption"><h3>Sculpture</h3></div>
     </div>
   </div>
@@ -270,10 +332,6 @@
   </div>
 
   <div class="image-grid">
-    <div class="image-card">
-      <img src="painting-wide.jpg" alt="Painting by Lauren Super" onclick="openLightbox(this)">
-      <div class="card-caption"><h3>Painting (wide)</h3></div>
-    </div>
     <div class="image-card">
       <img src="painting-close-up.jpg" alt="Painting detail by Lauren Super" onclick="openLightbox(this)">
       <div class="card-caption"><h3>Painting (detail)</h3></div>
@@ -294,6 +352,7 @@
   </footer>
 
   <script>
+    // Lightbox
     function openLightbox(img) {
       const lb = document.getElementById('lightbox');
       document.getElementById('lightbox-img').src = img.src;
@@ -306,6 +365,40 @@
 
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closeLightbox();
+    });
+
+    // Video poster thumbnails
+    document.querySelectorAll('.video-card').forEach(card => {
+      const video = card.querySelector('video');
+      const canvas = card.querySelector('.poster-overlay');
+      const playBtn = card.querySelector('.play-btn');
+      const ctx = canvas.getContext('2d');
+
+      // Grab a frame at 1 second in
+      video.addEventListener('loadeddata', () => {
+        video.currentTime = 1;
+      });
+
+      video.addEventListener('seeked', function onSeeked() {
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        video.removeEventListener('seeked', onSeeked);
+        video.currentTime = 0;
+      });
+
+      // Click poster to play
+      canvas.addEventListener('click', () => {
+        canvas.classList.add('hidden');
+        playBtn.style.display = 'none';
+        video.play();
+      });
+
+      // Show poster again when video ends
+      video.addEventListener('ended', () => {
+        canvas.classList.remove('hidden');
+        playBtn.style.display = '';
+      });
     });
   </script>
 </body>
