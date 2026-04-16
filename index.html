@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lauren Webb - Sculptor & Painter</title>
+  <title>Lauren Super - Sculptor & Painter</title>
   <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
   <style>
     * {
@@ -17,36 +17,54 @@
       background: #f5f0eb;
       color: #2c2c2c;
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
     }
 
     header {
       text-align: center;
-      padding: 3rem 1rem 1.5rem;
+      padding: 4rem 1rem 2rem;
     }
 
     header h1 {
-      font-size: 2.2rem;
+      font-size: 2.6rem;
       font-weight: 400;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       color: #3a3a3a;
     }
 
     header p {
       margin-top: 0.5rem;
-      font-size: 1rem;
+      font-size: 1.05rem;
       color: #777;
       font-style: italic;
     }
 
+    /* Section titles */
+    .section-title {
+      text-align: center;
+      padding: 3rem 1rem 1.5rem;
+    }
+
+    .section-title h2 {
+      font-size: 1.6rem;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      color: #4a4a4a;
+    }
+
+    .section-title .divider {
+      width: 40px;
+      height: 1px;
+      background: #ccc;
+      margin: 0.8rem auto 0;
+    }
+
+    /* 3D Viewer */
     .viewer-container {
       width: 90%;
       max-width: 800px;
       aspect-ratio: 1;
-      max-height: 70vh;
-      margin: 1rem auto 2rem;
+      max-height: 65vh;
+      margin: 0 auto 0.5rem;
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
@@ -59,41 +77,151 @@
       --poster-color: transparent;
     }
 
-    .piece-title {
+    .piece-caption {
       text-align: center;
-      margin-bottom: 3rem;
+      padding: 0.8rem 1rem 2rem;
     }
 
-    .piece-title h2 {
-      font-size: 1.4rem;
+    .piece-caption h3 {
+      font-size: 1.2rem;
       font-weight: 400;
     }
 
-    .piece-title p {
-      font-size: 0.85rem;
+    .piece-caption p {
+      font-size: 0.8rem;
       color: #999;
-      margin-top: 0.3rem;
+      margin-top: 0.2rem;
+    }
+
+    /* Video grid */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+      width: 90%;
+      max-width: 1100px;
+      margin: 0 auto 2rem;
+    }
+
+    .video-card {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+      background: #e8e2da;
+    }
+
+    .video-card video {
+      width: 100%;
+      display: block;
+    }
+
+    .video-card .card-caption {
+      padding: 0.8rem 1rem;
+      text-align: center;
+    }
+
+    .video-card .card-caption h3 {
+      font-size: 1rem;
+      font-weight: 400;
+    }
+
+    /* Image gallery */
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 1.5rem;
+      width: 90%;
+      max-width: 1100px;
+      margin: 0 auto 2rem;
+    }
+
+    .image-card {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+      background: #e8e2da;
+    }
+
+    .image-card img {
+      width: 100%;
+      display: block;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .image-card img:hover {
+      transform: scale(1.02);
+    }
+
+    .image-card .card-caption {
+      padding: 0.8rem 1rem;
+      text-align: center;
+    }
+
+    .image-card .card-caption h3 {
+      font-size: 1rem;
+      font-weight: 400;
+    }
+
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .lightbox img {
+      max-width: 92vw;
+      max-height: 92vh;
+      border-radius: 8px;
+      box-shadow: 0 0 60px rgba(0, 0, 0, 0.5);
     }
 
     footer {
-      margin-top: auto;
-      padding: 2rem;
       text-align: center;
+      padding: 3rem 1rem;
       font-size: 0.8rem;
       color: #aaa;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2rem;
+      }
+
+      .video-grid,
+      .image-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
+
   <header>
-    <h1>Lauren Webb</h1>
+    <h1>Lauren Super</h1>
     <p>Sculpture & Painting</p>
   </header>
+
+  <!-- 3D Sculpture -->
+  <div class="section-title">
+    <h2>3D Sculpture</h2>
+    <div class="divider"></div>
+  </div>
 
   <div class="viewer-container">
     <model-viewer
       src="fish-egg.glb"
-      alt="Fish Egg sculpture by Lauren Webb"
+      alt="Fish Egg sculpture by Lauren Super"
       auto-rotate
       camera-controls
       shadow-intensity="1"
@@ -101,14 +229,80 @@
       tone-mapping="commerce"
     ></model-viewer>
   </div>
-
-  <div class="piece-title">
-    <h2>Fish Egg</h2>
+  <div class="piece-caption">
+    <h3>Fish Egg</h3>
     <p>Interactive 3D — click and drag to rotate</p>
   </div>
 
+  <!-- Videos -->
+  <div class="section-title">
+    <h2>Process & Studio</h2>
+    <div class="divider"></div>
+  </div>
+
+  <div class="video-grid">
+    <div class="video-card">
+      <video src="fish-1.mov" controls playsinline preload="metadata"></video>
+      <div class="card-caption"><h3>Fish I</h3></div>
+    </div>
+    <div class="video-card">
+      <video src="fish-2.mov" controls playsinline preload="metadata"></video>
+      <div class="card-caption"><h3>Fish II</h3></div>
+    </div>
+    <div class="video-card">
+      <video src="fish-3.mov" controls playsinline preload="metadata"></video>
+      <div class="card-caption"><h3>Fish III</h3></div>
+    </div>
+    <div class="video-card">
+      <video src="fishing-guy.mov" controls playsinline preload="metadata"></video>
+      <div class="card-caption"><h3>Fishing Guy</h3></div>
+    </div>
+    <div class="video-card">
+      <video src="sculpture.mov" controls playsinline preload="metadata"></video>
+      <div class="card-caption"><h3>Sculpture</h3></div>
+    </div>
+  </div>
+
+  <!-- Paintings -->
+  <div class="section-title">
+    <h2>Paintings</h2>
+    <div class="divider"></div>
+  </div>
+
+  <div class="image-grid">
+    <div class="image-card">
+      <img src="painting-wide.jpg" alt="Painting by Lauren Super" onclick="openLightbox(this)">
+      <div class="card-caption"><h3>Painting (wide)</h3></div>
+    </div>
+    <div class="image-card">
+      <img src="painting-close-up.jpg" alt="Painting detail by Lauren Super" onclick="openLightbox(this)">
+      <div class="card-caption"><h3>Painting (detail)</h3></div>
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt="">
+  </div>
+
   <footer>
-    &copy; 2026 Lauren Webb
+    &copy; 2026 Lauren Super
   </footer>
+
+  <script>
+    function openLightbox(img) {
+      const lb = document.getElementById('lightbox');
+      document.getElementById('lightbox-img').src = img.src;
+      lb.classList.add('active');
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+  </script>
 </body>
 </html>
