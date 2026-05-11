@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lauren Super &mdash; Contemporary Multidisciplinary Artist</title>
+  <meta name="description" content="Lauren Super is a contemporary multidisciplinary artist exploring the tension between natural beauty and the digital masks we wear in the modern world.">
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #f5f0eb;
+      --bg-card: #e8e2da;
+      --ink: #2c2c2c;
+      --ink-soft: #555;
+      --ink-mute: #888;
+      --rule: #d4cdc3;
+      --accent: #3a3a3a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Georgia', serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ---------- Top nav (sticky) ---------- */
+    nav.top {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(245, 240, 235, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--rule);
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    nav.top .brand {
+      font-size: 1rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    nav.top ul {
+      display: flex;
+      gap: 1.8rem;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+
+    nav.top ul a {
+      color: var(--ink-soft);
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    nav.top ul a:hover { color: var(--accent); }
+
+    /* ---------- Header ---------- */
+    header.site {
+      text-align: center;
+      padding: 4rem 1.5rem 1.5rem;
+    }
+
+    header.site h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+    }
+
+    header.site .tagline {
+      margin-top: 0.6rem;
+      font-size: 0.95rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+    }
+
+    .hero-video {
+      width: 92%;
+      max-width: 960px;
+      margin: 2rem auto 1.5rem;
+      aspect-ratio: 16 / 9;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+      background: #000;
+    }
+
+    .hero-video iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
+    .statement {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 3rem;
+      text-align: center;
+      font-style: italic;
+      font-size: 1.15rem;
+      line-height: 1.7;
+      color: var(--ink-soft);
+    }
+
+    /* ---------- Major section ---------- */
+    .major-section {
+      padding: 4rem 1rem 2rem;
+      scroll-margin-top: 70px;
+    }
+
+    .major-section-header {
+      text-align: center;
+      padding: 2rem 1rem 1rem;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .major-section-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+      margin-bottom: 0.6rem;
+    }
+
+    .major-section-header h2 {
+      font-size: clamp(2.2rem, 5vw, 3rem);
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+    }
+
+    .major-section-header .desc {
+      font-size: 1rem;
+      color: var(--ink-soft);
+      max-width: 600px;
+      margin: 0 auto;
+      font-style: italic;
+    }
+
+    .major-divider {
+      width: 60px;
+      height: 1px;
+      background: var(--rule);
+      margin: 1.5rem auto 0;
+    }
+
+    /* ---------- Work piece ---------- */
+    .piece {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3rem 0.5rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .piece:last-of-type { border-bottom: 0; }
+
+    .piece-eyebrow {
+      text-align: center;
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+      margin-bottom: 0.4rem;
+    }
+
+    .piece h3 {
+      text-align: center;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
+
+    .piece .medium {
+      text-align: center;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+      margin-bottom: 1.4rem;
+    }
+
+    .piece .narrative {
+      max-width: 640px;
+      margin: 0 auto 2rem;
+      text-align: center;
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--ink-soft);
+      font-style: italic;
+    }
+
+    /* ---------- Media ---------- */
+    .feature-image {
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 36px rgba(0, 0, 0, 0.12);
+      background: var(--bg-card);
+    }
+
+    .feature-image img,
+    .feature-image video {
+      width: 100%;
+      display: block;
+    }
+
+    .feature-image img { cursor: zoom-in; }
+
+    .image-pair {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.2rem;
+      max-width: 1000px;
+      margin: 1.2rem auto 0;
+    }
+
+    .image-pair img {
+      width: 100%;
+      display: block;
+      border-radius: 10px;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+      cursor: zoom-in;
+    }
+
+    .image-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.2rem;
+      max-width: 1100px;
+      margin: 1.2rem auto 0;
+    }
+
+    .image-grid-3 img {
+      width: 100%;
+      display: block;
+      border-radius: 10px;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+      cursor: zoom-in;
+    }
+
+    .viewer-container {
+      width: 100%;
+      max-width: 720px;
+      aspect-ratio: 1;
+      margin: 0 auto;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 36px rgba(0, 0, 0, 0.14);
+      background: var(--bg-card);
+    }
+
+    model-viewer {
+      width: 100%;
+      height: 100%;
+    }
+
+    .viewer-hint {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--ink-mute);
+      margin-top: 0.8rem;
+      font-style: italic;
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.2rem;
+      max-width: 1000px;
+      margin: 1.2rem auto 0;
+    }
+
+    .video-grid video {
+      width: 100%;
+      display: block;
+      border-radius: 10px;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+      background: #000;
+    }
+
+    /* ---------- Placeholder ---------- */
+    .placeholder {
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto;
+      aspect-ratio: 4 / 3;
+      border: 1px dashed var(--rule);
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink-mute);
+      background: rgba(0, 0, 0, 0.02);
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .placeholder .ph-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+
+    .placeholder .ph-title {
+      font-size: 1.3rem;
+      font-style: italic;
+      color: var(--ink-soft);
+      margin-bottom: 0.6rem;
+    }
+
+    .placeholder .ph-note {
+      font-size: 0.85rem;
+      max-width: 360px;
+      line-height: 1.5;
+    }
+
+    /* ---------- Inquiries ---------- */
+    section.inquiries {
+      padding: 5rem 1.5rem 4rem;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.03);
+      margin-top: 4rem;
+      scroll-margin-top: 70px;
+    }
+
+    section.inquiries h2 {
+      font-size: 1.6rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      margin-bottom: 1rem;
+      color: var(--accent);
+    }
+
+    section.inquiries p {
+      max-width: 540px;
+      margin: 0 auto 1.5rem;
+      color: var(--ink-soft);
+    }
+
+    section.inquiries a.cta {
+      display: inline-block;
+      padding: 0.9rem 1.8rem;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    section.inquiries a.cta:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.75rem;
+      color: var(--ink-mute);
+      letter-spacing: 0.1em;
+    }
+
+    footer a {
+      color: var(--ink-mute);
+      margin: 0 0.6rem;
+    }
+
+    /* ---------- Lightbox ---------- */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.92);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      cursor: zoom-out;
+      padding: 2rem;
+    }
+
+    .lightbox.active { display: flex; }
+
+    .lightbox img {
+      max-width: 95vw;
+      max-height: 95vh;
+      border-radius: 4px;
+      box-shadow: 0 0 60px rgba(0, 0, 0, 0.5);
+    }
+
+    @media (max-width: 600px) {
+      nav.top ul { gap: 1rem; }
+      nav.top ul a { font-size: 0.7rem; }
+      header.site { padding: 2rem 1rem 1rem; }
+      .major-section { padding: 2rem 0.5rem 1rem; }
+      .piece { padding: 2rem 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============ TOP NAV ============ -->
+  <nav class="top">
+    <a href="#top" class="brand">Lauren Super</a>
+    <ul>
+      <li><a href="#paintings">Paintings</a></li>
+      <li><a href="#sculpture">Sculpture</a></li>
+      <li><a href="#video">Video</a></li>
+      <li><a href="#inquiries">Inquiries</a></li>
+    </ul>
+  </nav>
+
+  <!-- ============ HEADER ============ -->
+  <header id="top" class="site">
+    <h1>Lauren Super</h1>
+    <p class="tagline">Contemporary Multidisciplinary Artist</p>
+  </header>
+
+  <!-- ============ HERO VIDEO ============ -->
+  <div id="video" class="hero-video">
+    <iframe
+      src="https://www.youtube.com/embed/UfyhTInjRu8"
+      title="Lauren Super &mdash; Artist Walkthrough"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen
+    ></iframe>
+  </div>
+
+  <!-- ============ ARTIST STATEMENT ============ -->
+  <p class="statement">
+    &ldquo;My work explores the tension between natural beauty and the digital masks we wear in the modern world &mdash;
+    a journey through masking and consumption, always searching for substance in a superficial age.&rdquo;
+  </p>
+
+  <!-- ============================================================== -->
+  <!-- =================== PAINTINGS ================================ -->
+  <!-- ============================================================== -->
+  <section id="paintings" class="major-section">
+    <div class="major-section-header">
+      <p class="major-section-eyebrow">Part I</p>
+      <h2>Paintings</h2>
+      <p class="desc">
+        Oils on canvas &mdash; from sunsets to botanicals to large-scale studies of consumption and camouflage.
+      </p>
+      <div class="major-divider"></div>
+    </div>
+
+    <!-- Bliss -->
+    <div class="piece">
+      <p class="piece-eyebrow">Bliss</p>
+      <h3>Bliss</h3>
+      <p class="medium">Oil on canvas</p>
+      <p class="narrative">
+        An oil painting inspired by a Cape Town sunset &mdash; a dual perspective of clouds rolling over a purple beach,
+        capturing the vibrant light and magpie shimmer that inspires the work.
+      </p>
+      <div class="feature-image">
+        <img src="/bliss.jpg" alt="Bliss &mdash; Cape Town sunset oil painting" onclick="openLightbox(this)">
+      </div>
+      <div class="image-pair" style="margin-top: 1.2rem;">
+        <img src="/bliss-detail.jpg" alt="Bliss &mdash; surface detail" onclick="openLightbox(this)">
+      </div>
+    </div>
+
+    <!-- Botanical Series -->
+    <div class="piece">
+      <p class="piece-eyebrow">Botanical Series</p>
+      <h3>Hibiscus &amp; Cosmos</h3>
+      <p class="medium">Oils on canvas &middot; Hampstead Garden Suburb</p>
+      <p class="narrative">
+        The botanical series uses deep black backgrounds to make the light pop &mdash; painted to find a sense of survival
+        and beauty during a dark and difficult time.
+      </p>
+      <div class="feature-image">
+        <img src="/cosmos.jpg" alt="Cosmos &mdash; oil painting" onclick="openLightbox(this)">
+      </div>
+      <div class="image-grid-3" style="margin-top: 1.5rem;">
+        <img src="/hibiscus-pink.jpg" alt="Pink hibiscus" onclick="openLightbox(this)">
+        <img src="/hibiscus-purple.jpg" alt="Purple hibiscus" onclick="openLightbox(this)">
+        <img src="/hibiscus-closeup.jpg" alt="Hibiscus detail" onclick="openLightbox(this)">
+        <img src="/hibiscus-purple-close.jpg" alt="Purple hibiscus detail" onclick="openLightbox(this)">
+        <img src="/peony.jpg" alt="Peony" onclick="openLightbox(this)">
+        <img src="/cosmos-eye.jpg" alt="Cosmos detail &mdash; eye behind veil" onclick="openLightbox(this)">
+      </div>
+    </div>
+
+    <!-- Camo Series -->
+    <div class="piece">
+      <p class="piece-eyebrow">Large-scale Oils</p>
+      <h3>The Camo Series</h3>
+      <p class="medium">Oils on canvas &middot; Large scale</p>
+      <p class="narrative">
+        Large-scale oils showing how our children become camouflaged and lost within a superficial, high-speed culture.
+      </p>
+      <div class="feature-image">
+        <img src="/camo-fish.jpg" alt="Camo &mdash; large oil painting" onclick="openLightbox(this)">
+      </div>
+      <div class="image-pair" style="margin-top: 1.2rem;">
+        <img src="/camo-close.jpg" alt="Camo detail" onclick="openLightbox(this)">
+        <img src="/painting-3.jpg" alt="Camo series painting" onclick="openLightbox(this)">
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- =================== SCULPTURE ================================ -->
+  <!-- ============================================================== -->
+  <section id="sculpture" class="major-section">
+    <div class="major-section-header">
+      <p class="major-section-eyebrow">Part II</p>
+      <h2>Sculpture</h2>
+      <p class="desc">
+        Limestone, ceramic, glass and resin works &mdash; a meditation on masking and consumption, from the golden child
+        to the digital feed that swallows the next generation.
+      </p>
+      <div class="major-divider"></div>
+    </div>
+
+    <!-- The Golden Child -->
+    <div class="piece">
+      <p class="piece-eyebrow">Limestone</p>
+      <h3>The Golden Child</h3>
+      <p class="medium">Hand-carved limestone</p>
+      <p class="narrative">
+        A hand-carved limestone fish emerging from a golden egg &mdash; the golden child, a treasure born into a world
+        of constant exposure.
+      </p>
+      <div class="viewer-container">
+        <model-viewer
+          src="/fish-egg.glb"
+          alt="The Golden Child &mdash; hand-carved limestone sculpture"
+          auto-rotate
+          camera-controls
+          shadow-intensity="1"
+          environment-image="neutral"
+          tone-mapping="commerce"
+        ></model-viewer>
+      </div>
+      <p class="viewer-hint">Interactive 3D &mdash; click and drag to rotate</p>
+
+      <div class="video-grid" style="margin-top: 2rem;">
+        <video src="/fish-1.mp4#t=1" controls playsinline preload="metadata" muted></video>
+        <video src="/fish-2.mp4#t=1" controls playsinline preload="metadata" muted></video>
+        <video src="/fish-3.mp4#t=1" controls playsinline preload="metadata" muted></video>
+      </div>
+    </div>
+
+    <!-- Seed -->
+    <div class="piece">
+      <p class="piece-eyebrow">Limestone</p>
+      <h3>Seed</h3>
+      <p class="medium">Hand-carved limestone</p>
+      <p class="narrative">
+        A mother holding her child, slowly consumed by the fish &mdash; a metaphor for how this digital world can
+        swallow the next generation if we aren&rsquo;t careful.
+      </p>
+      <div class="feature-image">
+        <img src="/seed-1.jpg" alt="Seed &mdash; limestone sculpture" onclick="openLightbox(this)">
+      </div>
+      <div class="image-pair" style="margin-top: 1.2rem;">
+        <img src="/seed-2.jpg" alt="Seed &mdash; alternate angle" onclick="openLightbox(this)">
+      </div>
+    </div>
+
+    <!-- Smother -->
+    <div class="piece">
+      <p class="piece-eyebrow">Ceramic</p>
+      <h3>Smother</h3>
+      <p class="medium">Ceramic</p>
+      <p class="narrative">
+        A ceramic piece exploring the weight of motherhood and the desire to protect our children from the forbidden
+        fruit of social media &mdash; the struggle to keep them safe from the digital rubbish that can feel so suffocating.
+      </p>
+      <div class="placeholder">
+        <p class="ph-label">Image forthcoming</p>
+        <p class="ph-title">Smother</p>
+        <p class="ph-note">Documentation in preparation. Available on request.</p>
+      </div>
+    </div>
+
+    <!-- Leroy -->
+    <div class="piece">
+      <p class="piece-eyebrow">Ceramic</p>
+      <h3>Leroy</h3>
+      <p class="medium">Ceramic life sculpture</p>
+      <p class="narrative">
+        A nod to my African heritage &mdash; blending a traditional mask aesthetic with a metallic finish that catches
+        the eye and reflects the beauty I remember from home.
+      </p>
+      <div class="feature-image">
+        <img src="/leroy.jpg" alt="Leroy &mdash; ceramic life sculpture" onclick="openLightbox(this)">
+      </div>
+    </div>
+
+    <!-- Unfiltered -->
+    <div class="piece">
+      <p class="piece-eyebrow">Glass</p>
+      <h3>Unfiltered</h3>
+      <p class="medium">Glass, oil &middot; Spinning sculpture</p>
+      <p class="narrative">
+        A spinning glass sculpture where the viewer sees their own reflection through a digital Snapchat mask &mdash;
+        an analogy for the goldfish existence of a modern teenager, always on display and always observed.
+      </p>
+      <div class="feature-image">
+        <img src="/unfiltered.jpg" alt="Unfiltered &mdash; spinning glass sculpture" onclick="openLightbox(this)">
+      </div>
+    </div>
+
+    <!-- Mark -->
+    <div class="piece">
+      <p class="piece-eyebrow">Mixed Media</p>
+      <h3>Mark</h3>
+      <p class="medium">Resin, glass, taxidermied fish</p>
+      <p class="narrative">
+        A commentary on the architects of social media. Mark sits atop a glass tank of taxidermied fish, fishing for
+        the next generation &mdash; a study on the masks worn by those who control the digital feed.
+      </p>
+      <div class="feature-image">
+        <img src="/mark-2.jpg" alt="Mark &mdash; gilded figure fishing atop a glass tank" onclick="openLightbox(this)">
+      </div>
+      <div class="image-pair" style="margin-top: 1.2rem;">
+        <img src="/mark-1.jpg" alt="Mark &mdash; dramatic studio shot" onclick="openLightbox(this)">
+      </div>
+    </div>
+
+    <!-- Resin Trilogy -->
+    <div class="piece">
+      <p class="piece-eyebrow">Resin Trilogy</p>
+      <h3>Analogy &middot; Dopamine &middot; Euphoria</h3>
+      <p class="medium">Resin</p>
+      <p class="narrative">
+        A trilogy on consumption. Analogy, filled with lucky charms. Dopamine, packed with toxic hits of medicine and
+        makeup. And Euphoria, representing the fleeting golden peak.
+      </p>
+
+      <div style="margin-top: 1.5rem;">
+        <p class="piece-eyebrow" style="margin-bottom: 0.8rem;">Analogy</p>
+        <div class="feature-image">
+          <img src="/analogy-wide.jpg" alt="Analogy &mdash; resin sculpture with lucky charms" onclick="openLightbox(this)">
+        </div>
+        <div class="image-pair" style="margin-top: 1.2rem;">
+          <img src="/analogy-close.jpg" alt="Analogy detail" onclick="openLightbox(this)">
+          <img src="/analogy-closer.jpg" alt="Analogy detail close-up" onclick="openLightbox(this)">
+        </div>
+      </div>
+
+      <div class="image-pair" style="margin-top: 3rem;">
+        <div>
+          <p class="piece-eyebrow" style="margin-bottom: 0.8rem;">Dopamine</p>
+          <video src="/dopamine.mp4#t=1" controls playsinline preload="metadata" muted style="width:100%; border-radius:10px; box-shadow:0 6px 24px rgba(0,0,0,0.1);"></video>
+        </div>
+        <div>
+          <p class="piece-eyebrow" style="margin-bottom: 0.8rem;">Euphoria</p>
+          <video src="/euphoria.mp4#t=1" controls playsinline preload="metadata" muted style="width:100%; border-radius:10px; box-shadow:0 6px 24px rgba(0,0,0,0.1);"></video>
+        </div>
+      </div>
+    </div>
+
+    <!-- Milk Splat -->
+    <div class="piece">
+      <p class="piece-eyebrow">Resin</p>
+      <h3>The Milk Splat</h3>
+      <p class="medium">Resin</p>
+      <p class="narrative">
+        The closing piece &mdash; a journey through masking and consumption, always searching for substance in a
+        superficial age.
+      </p>
+      <div class="feature-image">
+        <img src="/milk-splat.jpg" alt="The Milk Splat &mdash; resin sculpture" onclick="openLightbox(this)">
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ INQUIRIES ============ -->
+  <section id="inquiries" class="inquiries">
+    <h2>Inquiries</h2>
+    <p>
+      Lauren Super is currently open to representation, exhibitions, and studio visits by appointment.
+    </p>
+    <a class="cta" href="mailto:hello@laurensuper.com?subject=Studio%20Inquiry">Get in touch</a>
+  </section>
+
+  <footer>
+    &copy; 2026 Lauren Super
+    <span style="margin-left: 1.5rem;"><a href="/">View narrative version</a></span>
+  </footer>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt="">
+  </div>
+
+  <script>
+    function openLightbox(img) {
+      const lb = document.getElementById('lightbox');
+      document.getElementById('lightbox-img').src = img.src;
+      lb.classList.add('active');
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+    }
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+  </script>
+</body>
+</html>
