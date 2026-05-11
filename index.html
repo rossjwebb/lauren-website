@@ -250,19 +250,58 @@
       margin: 0 0.6rem;
     }
 
+    /* ---------- Tablet ---------- */
+    @media (max-width: 900px) {
+      .choice-grid {
+        gap: 1rem;
+        padding: 0 1rem 4rem;
+      }
+      .choice-card-content {
+        padding: 2rem;
+      }
+    }
+
     /* ---------- Mobile ---------- */
-    @media (max-width: 768px) {
+    @media (max-width: 640px) {
+      header.site { padding: 2.5rem 1rem 0.5rem; }
+      header.site h1 { letter-spacing: 0.08em; }
+      header.site .tagline { font-size: 0.8rem; letter-spacing: 0.15em; }
+
+      .hero-video {
+        width: 100%;
+        margin: 1.5rem auto 1rem;
+        border-radius: 0;
+      }
+
+      .statement {
+        font-size: 1rem;
+        line-height: 1.6;
+        padding: 1.5rem 1.5rem 3rem;
+      }
+
+      .choice-prompt { padding: 0.5rem 1.5rem 1.5rem; }
+      .choice-prompt p { font-size: 0.7rem; letter-spacing: 0.25em; }
+
       .choice-grid {
         grid-template-columns: 1fr;
-        gap: 1.2rem;
+        gap: 1rem;
+        padding: 0 1rem 3rem;
       }
       .choice-card {
         aspect-ratio: 4 / 5;
       }
       .choice-card-content {
-        padding: 1.8rem;
+        padding: 1.6rem;
       }
-      header.site { padding: 2.5rem 1rem 1rem; }
+      .choice-card h2 {
+        font-size: 2.2rem;
+      }
+      .choice-card p {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+      }
+
+      section.inquiries { padding: 3rem 1rem; }
     }
   </style>
 </head>

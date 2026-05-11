@@ -166,14 +166,16 @@
 
     .image-pair {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 1.2rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
       max-width: 1000px;
       margin: 1.2rem auto 0;
     }
 
     .image-pair img {
       width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
       display: block;
       border-radius: 10px;
       box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
@@ -182,14 +184,16 @@
 
     .image-grid-3 {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.2rem;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
       max-width: 1100px;
       margin: 1.2rem auto 0;
     }
 
     .image-grid-3 img {
       width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
       display: block;
       border-radius: 10px;
       box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
@@ -343,9 +347,59 @@
       border-radius: 4px;
     }
 
-    @media (max-width: 600px) {
-      .section-header { padding: 3rem 1rem 1rem; }
-      .piece { padding: 2rem 0.5rem; }
+    /* ---------- Tablet ---------- */
+    @media (max-width: 900px) {
+      .image-grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.8rem;
+      }
+    }
+
+    /* ---------- Mobile ---------- */
+    @media (max-width: 640px) {
+      nav.top {
+        padding: 1rem 1rem;
+      }
+      nav.top .home-link,
+      nav.top .brand {
+        font-size: 0.7rem;
+        letter-spacing: 0.12em;
+      }
+
+      .section-header { padding: 2.5rem 1rem 0.5rem; }
+      .section-header .desc { font-size: 0.95rem; }
+      .section-divider { margin-top: 1.5rem; }
+
+      .piece { padding: 2.5rem 0.5rem; }
+      .piece .narrative { font-size: 0.95rem; }
+
+      .image-pair {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+      }
+      .image-grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.6rem;
+      }
+
+      .cross-link {
+        padding: 0 0.5rem;
+      }
+      .cross-link a {
+        aspect-ratio: 16 / 9;
+      }
+      .cross-link-content {
+        padding: 1.5rem;
+      }
+
+      section.inquiries { padding: 3rem 1rem; }
+    }
+
+    /* ---------- Small phone ---------- */
+    @media (max-width: 420px) {
+      .image-grid-3 {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -378,10 +432,10 @@
       capturing the vibrant light and magpie shimmer that inspires the work.
     </p>
     <div class="feature-image">
-      <img src="/bliss.jpg" alt="Bliss &mdash; Cape Town sunset oil painting" onclick="openLightbox(this)">
+      <img src="/bliss.jpg" alt="Bliss &mdash; Cape Town sunset oil painting" loading="lazy" onclick="openLightbox(this)">
     </div>
     <div class="image-pair" style="margin-top: 1.2rem;">
-      <img src="/bliss-detail.jpg" alt="Bliss &mdash; surface detail" onclick="openLightbox(this)">
+      <img src="/bliss-detail.jpg" alt="Bliss &mdash; surface detail" loading="lazy" onclick="openLightbox(this)">
     </div>
   </article>
 
@@ -395,15 +449,15 @@
       and beauty during a dark and difficult time.
     </p>
     <div class="feature-image">
-      <img src="/cosmos.jpg" alt="Cosmos &mdash; oil painting" onclick="openLightbox(this)">
+      <img src="/cosmos.jpg" alt="Cosmos &mdash; oil painting" loading="lazy" onclick="openLightbox(this)">
     </div>
     <div class="image-grid-3" style="margin-top: 1.5rem;">
-      <img src="/hibiscus-pink.jpg" alt="Pink hibiscus" onclick="openLightbox(this)">
-      <img src="/hibiscus-purple.jpg" alt="Purple hibiscus" onclick="openLightbox(this)">
-      <img src="/hibiscus-closeup.jpg" alt="Hibiscus detail" onclick="openLightbox(this)">
-      <img src="/hibiscus-purple-close.jpg" alt="Purple hibiscus detail" onclick="openLightbox(this)">
-      <img src="/peony.jpg" alt="Peony" onclick="openLightbox(this)">
-      <img src="/cosmos-eye.jpg" alt="Cosmos detail &mdash; eye behind veil" onclick="openLightbox(this)">
+      <img src="/hibiscus-pink.jpg" alt="Pink hibiscus" loading="lazy" onclick="openLightbox(this)">
+      <img src="/hibiscus-purple.jpg" alt="Purple hibiscus" loading="lazy" onclick="openLightbox(this)">
+      <img src="/hibiscus-closeup.jpg" alt="Hibiscus detail" loading="lazy" onclick="openLightbox(this)">
+      <img src="/hibiscus-purple-close.jpg" alt="Purple hibiscus detail" loading="lazy" onclick="openLightbox(this)">
+      <img src="/peony.jpg" alt="Peony" loading="lazy" onclick="openLightbox(this)">
+      <img src="/cosmos-eye.jpg" alt="Cosmos detail &mdash; eye behind veil" loading="lazy" onclick="openLightbox(this)">
     </div>
   </article>
 
@@ -418,20 +472,20 @@
 
     <!-- Hero: install shot -->
     <div class="feature-image">
-      <img src="/camo-install.jpg" alt="Camo Series &mdash; gallery installation" onclick="openLightbox(this)">
+      <img src="/camo-install.jpg" alt="Camo Series &mdash; gallery installation" loading="lazy" onclick="openLightbox(this)">
     </div>
 
     <!-- The big rainbow fish painting -->
     <div class="feature-image" style="margin-top: 1.5rem;">
-      <img src="/camo-fish.jpg" alt="Camo &mdash; large oil painting of rainbow fish in candy" onclick="openLightbox(this)">
+      <img src="/camo-fish.jpg" alt="Camo &mdash; large oil painting of rainbow fish in candy" loading="lazy" onclick="openLightbox(this)">
     </div>
 
     <div class="image-grid-3" style="margin-top: 1.5rem;">
-      <img src="/lucky-wide.jpg" alt="Camo &mdash; goldfish in candy" onclick="openLightbox(this)">
-      <img src="/lucky-close.jpg" alt="Camo detail" onclick="openLightbox(this)">
-      <img src="/lucky-closer.jpg" alt="Camo detail &mdash; face among candy" onclick="openLightbox(this)">
-      <img src="/camo-close.jpg" alt="Camo detail" onclick="openLightbox(this)">
-      <img src="/painting-3.jpg" alt="Camo series painting" onclick="openLightbox(this)">
+      <img src="/lucky-wide.jpg" alt="Camo &mdash; goldfish in candy" loading="lazy" onclick="openLightbox(this)">
+      <img src="/lucky-close.jpg" alt="Camo detail" loading="lazy" onclick="openLightbox(this)">
+      <img src="/lucky-closer.jpg" alt="Camo detail &mdash; face among candy" loading="lazy" onclick="openLightbox(this)">
+      <img src="/camo-close.jpg" alt="Camo detail" loading="lazy" onclick="openLightbox(this)">
+      <img src="/painting-3.jpg" alt="Camo series painting" loading="lazy" onclick="openLightbox(this)">
     </div>
   </article>
 
