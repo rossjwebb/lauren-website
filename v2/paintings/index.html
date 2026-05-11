@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paintings &mdash; Lauren Super</title>
+  <meta name="description" content="Oils on canvas by Lauren Super &mdash; from sunsets to botanicals to large-scale studies of consumption and camouflage.">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #f5f0eb;
+      --bg-card: #e8e2da;
+      --ink: #2c2c2c;
+      --ink-soft: #555;
+      --ink-mute: #888;
+      --rule: #d4cdc3;
+      --accent: #3a3a3a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Georgia', serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ---------- Minimal top bar ---------- */
+    nav.top {
+      padding: 1.4rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    nav.top .home-link {
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    nav.top .home-link:hover { color: var(--accent); }
+
+    nav.top .home-link::before {
+      content: '←';
+      margin-right: 0.6rem;
+    }
+
+    nav.top .brand {
+      font-size: 0.9rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    /* ---------- Section header ---------- */
+    .section-header {
+      text-align: center;
+      padding: 5rem 1.5rem 1rem;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .section-header .eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+      margin-bottom: 0.6rem;
+    }
+
+    .section-header h1 {
+      font-size: clamp(2.4rem, 5vw, 3.4rem);
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .section-header .desc {
+      font-size: 1.05rem;
+      color: var(--ink-soft);
+      font-style: italic;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .section-divider {
+      width: 60px;
+      height: 1px;
+      background: var(--rule);
+      margin: 2rem auto 0;
+    }
+
+    /* ---------- Piece ---------- */
+    .piece {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4rem 1rem 3rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .piece:last-of-type { border-bottom: 0; }
+
+    .piece-eyebrow {
+      text-align: center;
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+      margin-bottom: 0.4rem;
+    }
+
+    .piece h2 {
+      text-align: center;
+      font-size: clamp(1.7rem, 3.4vw, 2.4rem);
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
+
+    .piece .medium {
+      text-align: center;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+      margin-bottom: 1.5rem;
+    }
+
+    .piece .narrative {
+      max-width: 640px;
+      margin: 0 auto 2.2rem;
+      text-align: center;
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: var(--ink-soft);
+      font-style: italic;
+    }
+
+    /* ---------- Media ---------- */
+    .feature-image {
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 36px rgba(0, 0, 0, 0.12);
+      background: var(--bg-card);
+    }
+
+    .feature-image img {
+      width: 100%;
+      display: block;
+      cursor: zoom-in;
+    }
+
+    .image-pair {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.2rem;
+      max-width: 1000px;
+      margin: 1.2rem auto 0;
+    }
+
+    .image-pair img {
+      width: 100%;
+      display: block;
+      border-radius: 10px;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+      cursor: zoom-in;
+    }
+
+    .image-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.2rem;
+      max-width: 1100px;
+      margin: 1.2rem auto 0;
+    }
+
+    .image-grid-3 img {
+      width: 100%;
+      display: block;
+      border-radius: 10px;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+      cursor: zoom-in;
+    }
+
+    /* ---------- Cross-link card ---------- */
+    .cross-link {
+      max-width: 1100px;
+      margin: 4rem auto 0;
+      padding: 0 1rem;
+    }
+
+    .cross-link a {
+      position: relative;
+      display: block;
+      aspect-ratio: 21 / 9;
+      overflow: hidden;
+      border-radius: 14px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+      text-decoration: none;
+      color: white;
+      isolation: isolate;
+    }
+
+    .cross-link-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transition: transform 1s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+
+    .cross-link a:hover .cross-link-bg {
+      transform: scale(1.05);
+    }
+
+    .cross-link-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.6) 0%,
+        rgba(0, 0, 0, 0.3) 60%,
+        rgba(0, 0, 0, 0.5) 100%
+      );
+      z-index: 1;
+    }
+
+    .cross-link-content {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 2.5rem;
+      text-align: center;
+      align-items: center;
+    }
+
+    .cross-link-content .eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      opacity: 0.85;
+      margin-bottom: 0.6rem;
+    }
+
+    .cross-link-content h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.8rem;
+    }
+
+    .cross-link-content .arrow {
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .cross-link-content .arrow::after {
+      content: '→';
+      margin-left: 0.7rem;
+    }
+
+    /* ---------- Inquiries ---------- */
+    section.inquiries {
+      padding: 5rem 1.5rem 4rem;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.03);
+      margin-top: 4rem;
+    }
+
+    section.inquiries h2 {
+      font-size: 1.6rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      margin-bottom: 1rem;
+      color: var(--accent);
+    }
+
+    section.inquiries p {
+      max-width: 540px;
+      margin: 0 auto 1.5rem;
+      color: var(--ink-soft);
+    }
+
+    section.inquiries a.cta {
+      display: inline-block;
+      padding: 0.9rem 1.8rem;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    section.inquiries a.cta:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.75rem;
+      color: var(--ink-mute);
+      letter-spacing: 0.1em;
+    }
+
+    /* ---------- Lightbox ---------- */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.92);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      cursor: zoom-out;
+      padding: 2rem;
+    }
+    .lightbox.active { display: flex; }
+    .lightbox img {
+      max-width: 95vw;
+      max-height: 95vh;
+      border-radius: 4px;
+    }
+
+    @media (max-width: 600px) {
+      .section-header { padding: 3rem 1rem 1rem; }
+      .piece { padding: 2rem 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============ TOP NAV ============ -->
+  <nav class="top">
+    <a href="/v2/" class="home-link">Back</a>
+    <a href="/v2/" class="brand">Lauren Super</a>
+    <span style="width: 50px;"></span>
+  </nav>
+
+  <!-- ============ SECTION HEADER ============ -->
+  <header class="section-header">
+    <p class="eyebrow">Part I</p>
+    <h1>Paintings</h1>
+    <p class="desc">
+      Oils on canvas &mdash; from a Cape Town sunset to large-scale studies of botanical beauty and digital camouflage.
+    </p>
+    <div class="section-divider"></div>
+  </header>
+
+  <!-- Bliss -->
+  <article class="piece">
+    <p class="piece-eyebrow">Bliss</p>
+    <h2>Bliss</h2>
+    <p class="medium">Oil on canvas</p>
+    <p class="narrative">
+      An oil painting inspired by a Cape Town sunset &mdash; a dual perspective of clouds rolling over a purple beach,
+      capturing the vibrant light and magpie shimmer that inspires the work.
+    </p>
+    <div class="feature-image">
+      <img src="/bliss.jpg" alt="Bliss &mdash; Cape Town sunset oil painting" onclick="openLightbox(this)">
+    </div>
+    <div class="image-pair" style="margin-top: 1.2rem;">
+      <img src="/bliss-detail.jpg" alt="Bliss &mdash; surface detail" onclick="openLightbox(this)">
+    </div>
+  </article>
+
+  <!-- Botanical -->
+  <article class="piece">
+    <p class="piece-eyebrow">Botanical Series</p>
+    <h2>Hibiscus &amp; Cosmos</h2>
+    <p class="medium">Oils on canvas &middot; Hampstead Garden Suburb</p>
+    <p class="narrative">
+      The botanical series uses deep black backgrounds to make the light pop &mdash; painted to find a sense of survival
+      and beauty during a dark and difficult time.
+    </p>
+    <div class="feature-image">
+      <img src="/cosmos.jpg" alt="Cosmos &mdash; oil painting" onclick="openLightbox(this)">
+    </div>
+    <div class="image-grid-3" style="margin-top: 1.5rem;">
+      <img src="/hibiscus-pink.jpg" alt="Pink hibiscus" onclick="openLightbox(this)">
+      <img src="/hibiscus-purple.jpg" alt="Purple hibiscus" onclick="openLightbox(this)">
+      <img src="/hibiscus-closeup.jpg" alt="Hibiscus detail" onclick="openLightbox(this)">
+      <img src="/hibiscus-purple-close.jpg" alt="Purple hibiscus detail" onclick="openLightbox(this)">
+      <img src="/peony.jpg" alt="Peony" onclick="openLightbox(this)">
+      <img src="/cosmos-eye.jpg" alt="Cosmos detail &mdash; eye behind veil" onclick="openLightbox(this)">
+    </div>
+  </article>
+
+  <!-- Camo Series -->
+  <article class="piece">
+    <p class="piece-eyebrow">Large-scale Oils</p>
+    <h2>The Camo Series</h2>
+    <p class="medium">Oils on canvas &middot; Large scale</p>
+    <p class="narrative">
+      Large-scale oils showing how our children become camouflaged and lost within a superficial, high-speed culture.
+    </p>
+    <div class="feature-image">
+      <img src="/camo-fish.jpg" alt="Camo &mdash; large oil painting" onclick="openLightbox(this)">
+    </div>
+    <div class="image-pair" style="margin-top: 1.2rem;">
+      <img src="/camo-close.jpg" alt="Camo detail" onclick="openLightbox(this)">
+      <img src="/painting-3.jpg" alt="Camo series painting" onclick="openLightbox(this)">
+    </div>
+  </article>
+
+  <!-- ============ CROSS-LINK ============ -->
+  <div class="cross-link">
+    <a href="/v2/sculpture/">
+      <div class="cross-link-bg" style="background-image: url('/mark-2.jpg');"></div>
+      <div class="cross-link-overlay"></div>
+      <div class="cross-link-content">
+        <p class="eyebrow">Continue to Part II</p>
+        <h2>Sculpture</h2>
+        <span class="arrow">View the sculpture</span>
+      </div>
+    </a>
+  </div>
+
+  <!-- ============ INQUIRIES ============ -->
+  <section class="inquiries">
+    <h2>Inquiries</h2>
+    <p>
+      Lauren Super is currently open to representation, exhibitions, and studio visits by appointment.
+    </p>
+    <a class="cta" href="mailto:hello@laurensuper.com?subject=Studio%20Inquiry">Get in touch</a>
+  </section>
+
+  <footer>
+    &copy; 2026 Lauren Super
+  </footer>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt="">
+  </div>
+
+  <script>
+    function openLightbox(img) {
+      const lb = document.getElementById('lightbox');
+      document.getElementById('lightbox-img').src = img.src;
+      lb.classList.add('active');
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+    }
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+  </script>
+</body>
+</html>
