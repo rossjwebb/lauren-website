@@ -4,14 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lauren Super &mdash; Contemporary Multidisciplinary Artist</title>
-  <meta name="description" content="Lauren Super is a contemporary multidisciplinary artist whose work explores the tension between natural beauty and the digital masks we wear in the modern world.">
-  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+  <meta name="description" content="Lauren Super is a contemporary multidisciplinary artist exploring the tension between natural beauty and the digital masks we wear in the modern world.">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
       --bg: #f5f0eb;
-      --bg-card: #e8e2da;
       --ink: #2c2c2c;
       --ink-soft: #555;
       --ink-mute: #888;
@@ -27,14 +25,14 @@
       overflow-x: hidden;
     }
 
-    /* ---------- Header / Hero ---------- */
+    /* ---------- Header ---------- */
     header.site {
       text-align: center;
-      padding: 5rem 1.5rem 2rem;
+      padding: 4.5rem 1.5rem 1.5rem;
     }
 
     header.site h1 {
-      font-size: clamp(2rem, 5vw, 3rem);
+      font-size: clamp(2.2rem, 5.5vw, 3.4rem);
       font-weight: 400;
       letter-spacing: 0.12em;
       color: var(--accent);
@@ -77,208 +75,135 @@
       color: var(--ink-soft);
     }
 
-    /* ---------- Narrative chapters ---------- */
-    .chapter {
-      padding: 4rem 1.5rem 3rem;
-      max-width: 1100px;
-      margin: 0 auto;
+    /* ---------- Choice prompt ---------- */
+    .choice-prompt {
+      text-align: center;
+      padding: 1rem 1.5rem 2.5rem;
     }
 
-    .chapter-eyebrow {
-      text-align: center;
+    .choice-prompt p {
       font-size: 0.8rem;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.3em;
       text-transform: uppercase;
       color: var(--ink-mute);
-      margin-bottom: 0.5rem;
     }
 
-    .chapter h2 {
-      text-align: center;
-      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+    /* ---------- Two-card layout ---------- */
+    .choice-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 1.5rem 5rem;
+    }
+
+    .choice-card {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      border-radius: 14px;
+      box-shadow: 0 14px 50px rgba(0, 0, 0, 0.18);
+      text-decoration: none;
+      color: white;
+      display: block;
+      isolation: isolate;
+      cursor: pointer;
+    }
+
+    .choice-card-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transition: transform 1.2s cubic-bezier(0.22, 0.61, 0.36, 1);
+      z-index: 1;
+    }
+
+    .choice-card:hover .choice-card-bg {
+      transform: scale(1.06);
+    }
+
+    .choice-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.05) 0%,
+        rgba(0, 0, 0, 0.15) 45%,
+        rgba(0, 0, 0, 0.6) 100%
+      );
+      z-index: 2;
+      transition: background 0.5s ease;
+    }
+
+    .choice-card:hover .choice-card-overlay {
+      background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.1) 0%,
+        rgba(0, 0, 0, 0.25) 45%,
+        rgba(0, 0, 0, 0.75) 100%
+      );
+    }
+
+    .choice-card-content {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 2.5rem;
+    }
+
+    .choice-card-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      opacity: 0.85;
+      margin-bottom: 0.8rem;
+    }
+
+    .choice-card h2 {
+      font-size: clamp(2.4rem, 5vw, 4rem);
       font-weight: 400;
-      letter-spacing: 0.04em;
-      color: var(--accent);
+      letter-spacing: 0.06em;
       margin-bottom: 1rem;
     }
 
-    .chapter .medium {
-      text-align: center;
-      font-size: 0.85rem;
-      color: var(--ink-mute);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 1.8rem;
+    .choice-card p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      opacity: 0.9;
+      max-width: 420px;
+      margin-bottom: 1.5rem;
     }
 
-    .chapter .narrative {
-      max-width: 640px;
-      margin: 0 auto 2.5rem;
-      text-align: center;
-      font-size: 1.05rem;
-      line-height: 1.75;
-      color: var(--ink-soft);
-      font-style: italic;
-    }
-
-    /* ---------- Section divider ---------- */
-    .divider {
-      width: 60px;
-      height: 1px;
-      background: var(--rule);
-      margin: 0 auto 2.5rem;
-    }
-
-    /* ---------- Media presentation ---------- */
-    .feature-image {
-      width: 100%;
-      max-width: 900px;
-      margin: 0 auto;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 10px 36px rgba(0, 0, 0, 0.14);
-      background: var(--bg-card);
-    }
-
-    .feature-image img {
-      width: 100%;
-      display: block;
-      cursor: zoom-in;
-    }
-
-    .image-pair {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 1.2rem;
-      max-width: 1000px;
-      margin: 1.2rem auto 0;
-    }
-
-    .image-pair img {
-      width: 100%;
-      display: block;
-      border-radius: 10px;
-      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
-      cursor: zoom-in;
-    }
-
-    .image-grid-3 {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.2rem;
-      max-width: 1100px;
-      margin: 1.2rem auto 0;
-    }
-
-    .image-grid-3 img {
-      width: 100%;
-      display: block;
-      border-radius: 10px;
-      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
-      cursor: zoom-in;
-    }
-
-    /* ---------- 3D Viewer ---------- */
-    .viewer-container {
-      width: 100%;
-      max-width: 720px;
-      aspect-ratio: 1;
-      margin: 0 auto;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 10px 36px rgba(0, 0, 0, 0.14);
-      background: var(--bg-card);
-    }
-
-    model-viewer {
-      width: 100%;
-      height: 100%;
-    }
-
-    .viewer-hint {
-      text-align: center;
-      font-size: 0.8rem;
-      color: var(--ink-mute);
-      margin-top: 0.8rem;
-      font-style: italic;
-    }
-
-    /* ---------- Video card ---------- */
-    .video-feature {
-      width: 100%;
-      max-width: 900px;
-      margin: 0 auto;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 10px 36px rgba(0, 0, 0, 0.14);
-      background: #000;
-    }
-
-    .video-feature video {
-      width: 100%;
-      display: block;
-    }
-
-    .video-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.2rem;
-      max-width: 1000px;
-      margin: 1.2rem auto 0;
-    }
-
-    .video-grid video {
-      width: 100%;
-      display: block;
-      border-radius: 10px;
-      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
-      background: #000;
-    }
-
-    /* ---------- Placeholder ---------- */
-    .placeholder {
-      width: 100%;
-      max-width: 700px;
-      margin: 0 auto;
-      aspect-ratio: 4 / 3;
-      border: 1px dashed var(--rule);
-      border-radius: 12px;
-      display: flex;
-      flex-direction: column;
+    .choice-card-arrow {
+      display: inline-flex;
       align-items: center;
-      justify-content: center;
-      color: var(--ink-mute);
-      background: rgba(0, 0, 0, 0.02);
-      padding: 2rem;
-      text-align: center;
-    }
-
-    .placeholder .ph-label {
-      font-size: 0.75rem;
-      letter-spacing: 0.18em;
+      gap: 0.7rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      margin-bottom: 0.4rem;
+      transition: gap 0.3s ease;
     }
 
-    .placeholder .ph-title {
-      font-size: 1.4rem;
-      font-style: italic;
-      color: var(--ink-soft);
-      margin-bottom: 0.6rem;
+    .choice-card:hover .choice-card-arrow {
+      gap: 1.2rem;
     }
 
-    .placeholder .ph-note {
-      font-size: 0.85rem;
-      max-width: 360px;
-      line-height: 1.5;
+    .choice-card-arrow::after {
+      content: '→';
+      font-size: 1.2rem;
+      line-height: 1;
     }
 
-    /* ---------- Footer / Inquiries ---------- */
+    /* ---------- Inquiries ---------- */
     section.inquiries {
       padding: 5rem 1.5rem 4rem;
       text-align: center;
       background: rgba(0, 0, 0, 0.03);
-      margin-top: 4rem;
     }
 
     section.inquiries h2 {
@@ -295,7 +220,7 @@
       color: var(--ink-soft);
     }
 
-    section.inquiries a {
+    section.inquiries a.cta {
       display: inline-block;
       padding: 0.9rem 1.8rem;
       border: 1px solid var(--accent);
@@ -307,7 +232,7 @@
       transition: background 0.2s, color 0.2s;
     }
 
-    section.inquiries a:hover {
+    section.inquiries a.cta:hover {
       background: var(--accent);
       color: var(--bg);
     }
@@ -320,33 +245,24 @@
       letter-spacing: 0.1em;
     }
 
-    /* ---------- Lightbox ---------- */
-    .lightbox {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.92);
-      z-index: 1000;
-      justify-content: center;
-      align-items: center;
-      cursor: zoom-out;
-      padding: 2rem;
-    }
-
-    .lightbox.active { display: flex; }
-
-    .lightbox img {
-      max-width: 95vw;
-      max-height: 95vh;
-      border-radius: 4px;
-      box-shadow: 0 0 60px rgba(0, 0, 0, 0.5);
+    footer a {
+      color: var(--ink-mute);
+      margin: 0 0.6rem;
     }
 
     /* ---------- Mobile ---------- */
-    @media (max-width: 600px) {
-      header.site { padding: 3rem 1rem 1rem; }
-      .chapter { padding: 3rem 1rem 2rem; }
-      section.inquiries { padding: 3rem 1rem; }
+    @media (max-width: 768px) {
+      .choice-grid {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+      }
+      .choice-card {
+        aspect-ratio: 4 / 5;
+      }
+      .choice-card-content {
+        padding: 1.8rem;
+      }
+      header.site { padding: 2.5rem 1rem 1rem; }
     }
   </style>
 </head>
@@ -374,215 +290,44 @@
     a journey through masking and consumption, always searching for substance in a superficial age.&rdquo;
   </p>
 
-  <!-- ============ 1. BLISS ============ -->
-  <section class="chapter">
-    <p class="chapter-eyebrow">I &middot; Beginning</p>
-    <h2>Bliss</h2>
-    <p class="medium">Oil on canvas</p>
-    <p class="narrative">
-      We begin with Bliss, an oil painting inspired by a Cape Town sunset. A dual perspective of clouds rolling over
-      a purple beach &mdash; the vibrant light and magpie shimmer that inspires the work.
-    </p>
-    <div class="feature-image">
-      <img src="bliss.jpg" alt="Bliss &mdash; Cape Town sunset oil painting in gallery install" onclick="openLightbox(this)">
-    </div>
-    <div class="image-pair" style="margin-top: 1.2rem;">
-      <img src="bliss-detail.jpg" alt="Bliss surface detail" onclick="openLightbox(this)">
-    </div>
-  </section>
+  <!-- ============ CHOICE PROMPT ============ -->
+  <div class="choice-prompt">
+    <p>Enter the work</p>
+  </div>
 
-  <!-- ============ 2. SMOTHER ============ -->
-  <section class="chapter">
-    <p class="chapter-eyebrow">II</p>
-    <h2>Smother</h2>
-    <p class="medium">Ceramic</p>
-    <p class="narrative">
-      Smother is a ceramic piece exploring the weight of motherhood and the desire to protect our children from the
-      forbidden fruit of social media &mdash; the struggle to keep them safe from the digital rubbish that can feel so suffocating.
-    </p>
-    <div class="placeholder">
-      <p class="ph-label">Image forthcoming</p>
-      <p class="ph-title">Smother</p>
-      <p class="ph-note">Documentation in preparation. Available on request.</p>
-    </div>
-  </section>
+  <!-- ============ TWO CARDS ============ -->
+  <div class="choice-grid">
 
-  <!-- ============ 3. BOTANICAL SERIES ============ -->
-  <section class="chapter">
-    <p class="chapter-eyebrow">III &middot; Botanical Series</p>
-    <h2>Hibiscus &amp; Cosmos</h2>
-    <p class="medium">Oils on canvas &middot; Hampstead Garden Suburb</p>
-    <p class="narrative">
-      The botanical series uses deep black backgrounds to make the light pop &mdash; painted to find a sense of survival
-      and beauty during a dark and difficult time.
-    </p>
-
-    <div class="feature-image">
-      <img src="cosmos.jpg" alt="Cosmos &mdash; oil painting of a woman masked by a white cosmos flower" onclick="openLightbox(this)">
-    </div>
-
-    <div class="image-grid-3" style="margin-top: 1.5rem;">
-      <img src="hibiscus-pink.jpg" alt="Pink hibiscus oil painting" onclick="openLightbox(this)">
-      <img src="hibiscus-purple.jpg" alt="Purple hibiscus oil painting" onclick="openLightbox(this)">
-      <img src="hibiscus-closeup.jpg" alt="Hibiscus detail" onclick="openLightbox(this)">
-      <img src="hibiscus-purple-close.jpg" alt="Purple hibiscus detail" onclick="openLightbox(this)">
-      <img src="peony.jpg" alt="Peony oil painting" onclick="openLightbox(this)">
-      <img src="cosmos-eye.jpg" alt="Cosmos detail &mdash; eye behind veil" onclick="openLightbox(this)">
-    </div>
-  </section>
-
-  <!-- ============ 4. THE GOLDEN CHILD ============ -->
-  <section class="chapter">
-    <p class="chapter-eyebrow">IV</p>
-    <h2>The Golden Child</h2>
-    <p class="medium">Hand-carved limestone</p>
-    <p class="narrative">
-      A hand-carved limestone fish emerging from a golden egg &mdash; the golden child, a treasure born into a world of
-      constant exposure.
-    </p>
-
-    <div class="viewer-container">
-      <model-viewer
-        src="fish-egg.glb"
-        alt="The Golden Child &mdash; hand-carved limestone sculpture by Lauren Super"
-        auto-rotate
-        camera-controls
-        shadow-intensity="1"
-        environment-image="neutral"
-        tone-mapping="commerce"
-      ></model-viewer>
-    </div>
-    <p class="viewer-hint">Interactive 3D &mdash; click and drag to rotate</p>
-  </section>
-
-  <!-- ============ 5. UNFILTERED ============ -->
-  <section class="chapter">
-    <p class="chapter-eyebrow">V</p>
-    <h2>Unfiltered</h2>
-    <p class="medium">Glass, oil &middot; Spinning sculpture</p>
-    <p class="narrative">
-      A spinning glass sculpture where the viewer sees their own reflection through a digital Snapchat mask &mdash; an
-      analogy for the goldfish existence of a modern teenager, always on display and always observed.
-    </p>
-    <div class="feature-image">
-      <img src="unfiltered.jpg" alt="Unfiltered &mdash; spinning glass sculpture with Snapchat strawberry mask" onclick="openLightbox(this)">
-    </div>
-  </section>
-
-  <!-- ============ 6. LEROY ============ -->
-  <section class="chapter">
-    <p class="chapter-eyebrow">VI</p>
-    <h2>Leroy</h2>
-    <p class="medium">Ceramic life sculpture</p>
-    <p class="narrative">
-      A nod to my African heritage &mdash; blending a traditional mask aesthetic with a metallic finish that catches the
-      eye and reflects the beauty I remember from home.
-    </p>
-    <div class="feature-image">
-      <img src="leroy.jpg" alt="Leroy &mdash; ceramic life sculpture with metallic finish" onclick="openLightbox(this)">
-    </div>
-  </section>
-
-  <!-- ============ 7. MARK ============ -->
-  <section class="chapter">
-    <p class="chapter-eyebrow">VII</p>
-    <h2>Mark</h2>
-    <p class="medium">Mixed media &middot; Resin, glass, taxidermied fish</p>
-    <p class="narrative">
-      Mark is a commentary on the architects of social media. He sits atop a glass tank of taxidermied fish, fishing
-      for the next generation &mdash; a study on the masks worn by those who control the digital feed.
-    </p>
-    <div class="feature-image">
-      <img src="mark-2.jpg" alt="Mark &mdash; gilded figure fishing atop a glass tank with taxidermied fish" onclick="openLightbox(this)">
-    </div>
-    <div class="image-pair" style="margin-top: 1.2rem;">
-      <img src="mark-1.jpg" alt="Mark &mdash; dramatic studio shot" onclick="openLightbox(this)">
-    </div>
-  </section>
-
-  <!-- ============ 8. RESIN TRILOGY ============ -->
-  <section class="chapter">
-    <p class="chapter-eyebrow">VIII &middot; The Resin Trilogy</p>
-    <h2>Analogy &middot; Dopamine &middot; Euphoria</h2>
-    <p class="medium">Resin</p>
-    <p class="narrative">
-      A trilogy on consumption. Analogy, filled with lucky charms. Dopamine, packed with toxic hits of medicine and
-      makeup. And Euphoria, representing the fleeting golden peak.
-    </p>
-
-    <!-- Analogy -->
-    <div style="margin-top: 2rem;">
-      <p class="chapter-eyebrow" style="margin-bottom: 1rem;">Analogy</p>
-      <div class="feature-image">
-        <video src="analogy.mp4#t=1" controls playsinline preload="metadata" muted></video>
+    <!-- PAINTINGS -->
+    <a href="/paintings/" class="choice-card">
+      <div class="choice-card-bg" style="background-image: url('/cosmos.jpg');"></div>
+      <div class="choice-card-overlay"></div>
+      <div class="choice-card-content">
+        <p class="choice-card-eyebrow">Part I</p>
+        <h2>Paintings</h2>
+        <p>
+          Oils on canvas &mdash; from a Cape Town sunset to large-scale studies of botanical beauty and digital camouflage.
+        </p>
+        <span class="choice-card-arrow">Enter</span>
       </div>
-      <div class="image-grid-3" style="margin-top: 1.2rem;">
-        <img src="analogy-wide.jpg" alt="Analogy &mdash; resin sculpture filled with lucky charms" onclick="openLightbox(this)">
-        <img src="analogy-close.jpg" alt="Analogy detail" onclick="openLightbox(this)">
-        <img src="analogy-closer.jpg" alt="Analogy detail close-up" onclick="openLightbox(this)">
+    </a>
+
+    <!-- SCULPTURE -->
+    <a href="/sculpture/" class="choice-card">
+      <div class="choice-card-bg" style="background-image: url('/mark-2.jpg');"></div>
+      <div class="choice-card-overlay"></div>
+      <div class="choice-card-content">
+        <p class="choice-card-eyebrow">Part II</p>
+        <h2>Sculpture</h2>
+        <p>
+          Limestone, ceramic, glass and resin &mdash; a meditation on masking, motherhood, and the digital feed that
+          swallows the next generation.
+        </p>
+        <span class="choice-card-arrow">Enter</span>
       </div>
-    </div>
+    </a>
 
-    <!-- Dopamine + Euphoria as videos -->
-    <div class="image-pair" style="margin-top: 3rem;">
-      <div>
-        <p class="chapter-eyebrow" style="margin-bottom: 0.8rem;">Dopamine</p>
-        <video src="dopamine.mp4#t=1" controls playsinline preload="metadata" muted style="width:100%; border-radius:10px; box-shadow:0 6px 24px rgba(0,0,0,0.1);"></video>
-      </div>
-      <div>
-        <p class="chapter-eyebrow" style="margin-bottom: 0.8rem;">Euphoria</p>
-        <video src="euphoria.mp4#t=1" controls playsinline preload="metadata" muted style="width:100%; border-radius:10px; box-shadow:0 6px 24px rgba(0,0,0,0.1);"></video>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ 9. CAMO SERIES ============ -->
-  <section class="chapter">
-    <p class="chapter-eyebrow">IX</p>
-    <h2>The Camo Series</h2>
-    <p class="medium">Oils on canvas &middot; Large scale</p>
-    <p class="narrative">
-      Large-scale oils showing how our children become camouflaged and lost within a superficial, high-speed culture.
-    </p>
-
-    <div class="feature-image">
-      <img src="camo-fish.jpg" alt="Camo &mdash; large-scale oil painting of a fish camouflaged among candy" onclick="openLightbox(this)">
-    </div>
-    <div class="image-pair" style="margin-top: 1.2rem;">
-      <img src="camo-close.jpg" alt="Camo detail" onclick="openLightbox(this)">
-      <img src="painting-3.jpg" alt="Camo series painting" onclick="openLightbox(this)">
-    </div>
-  </section>
-
-  <!-- ============ 10. SEED ============ -->
-  <section class="chapter">
-    <p class="chapter-eyebrow">X</p>
-    <h2>Seed</h2>
-    <p class="medium">Hand-carved limestone</p>
-    <p class="narrative">
-      Hand-carved from limestone. A mother holding her child, slowly consumed by the fish &mdash; a metaphor for how
-      this digital world can swallow the next generation if we aren&rsquo;t careful.
-    </p>
-    <div class="feature-image">
-      <img src="seed-1.jpg" alt="Seed &mdash; limestone sculpture of mother and child being consumed by fish" onclick="openLightbox(this)">
-    </div>
-    <div class="image-pair" style="margin-top: 1.2rem;">
-      <img src="seed-2.jpg" alt="Seed &mdash; alternate angle" onclick="openLightbox(this)">
-    </div>
-  </section>
-
-  <!-- ============ 11. MILK SPLAT ============ -->
-  <section class="chapter">
-    <p class="chapter-eyebrow">XI &middot; Closer</p>
-    <h2>The Milk Splat</h2>
-    <p class="medium">Resin</p>
-    <p class="narrative">
-      A journey through masking and consumption, always searching for substance in a superficial age.
-    </p>
-    <div class="feature-image">
-      <img src="milk-splat.jpg" alt="The Milk Splat &mdash; resin sculpture" onclick="openLightbox(this)">
-    </div>
-  </section>
+  </div>
 
   <!-- ============ INQUIRIES ============ -->
   <section class="inquiries">
@@ -590,31 +335,12 @@
     <p>
       Lauren Super is currently open to representation, exhibitions, and studio visits by appointment.
     </p>
-    <a href="mailto:hello@laurensuper.com?subject=Studio%20Inquiry">Get in touch</a>
+    <a class="cta" href="mailto:hello@laurensuper.com?subject=Studio%20Inquiry">Get in touch</a>
   </section>
 
   <footer>
     &copy; 2026 Lauren Super
-    <span style="margin-left: 1.5rem;"><a href="/v2/" style="color: var(--ink-mute);">View V2 (Paintings &amp; Sculpture)</a></span>
   </footer>
 
-  <!-- Lightbox -->
-  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-    <img id="lightbox-img" src="" alt="">
-  </div>
-
-  <script>
-    function openLightbox(img) {
-      const lb = document.getElementById('lightbox');
-      document.getElementById('lightbox-img').src = img.src;
-      lb.classList.add('active');
-    }
-    function closeLightbox() {
-      document.getElementById('lightbox').classList.remove('active');
-    }
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeLightbox();
-    });
-  </script>
 </body>
 </html>
