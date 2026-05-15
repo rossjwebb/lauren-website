@@ -220,21 +220,89 @@
       color: var(--ink-soft);
     }
 
-    section.inquiries a.cta {
-      display: inline-block;
-      padding: 0.9rem 1.8rem;
-      border: 1px solid var(--accent);
-      color: var(--accent);
-      text-decoration: none;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      font-size: 0.85rem;
-      transition: background 0.2s, color 0.2s;
+    /* ---------- Inquiry form ---------- */
+    .inquiry-form {
+      max-width: 560px;
+      margin: 1.5rem auto 0;
+      text-align: left;
     }
 
-    section.inquiries a.cta:hover {
+    .inquiry-form .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.8rem;
+    }
+
+    .inquiry-form input,
+    .inquiry-form select,
+    .inquiry-form textarea {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.6);
+      font-family: 'Georgia', serif;
+      font-size: 1rem;
+      color: var(--ink);
+      margin-bottom: 0.8rem;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .inquiry-form input:focus,
+    .inquiry-form select:focus,
+    .inquiry-form textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    .inquiry-form select {
+      appearance: none;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path fill='%23888' d='M6 8L0 0h12z'/></svg>");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      padding-right: 2.4rem;
+    }
+
+    .inquiry-form textarea {
+      resize: vertical;
+      min-height: 120px;
+      font-family: 'Georgia', serif;
+    }
+
+    .inquiry-form button {
       background: var(--accent);
       color: var(--bg);
+      border: 1px solid var(--accent);
+      padding: 0.9rem 2.2rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      cursor: pointer;
+      font-family: inherit;
+      border-radius: 4px;
+      transition: opacity 0.2s;
+      margin-top: 0.4rem;
+    }
+
+    .inquiry-form button:hover { opacity: 0.85; }
+    .inquiry-form button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .form-status {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      text-align: center;
+      min-height: 1.5rem;
+      color: var(--ink-soft);
+    }
+
+    .form-status.success { color: #2d6e3e; }
+    .form-status.error { color: #a83232; }
+
+    @media (max-width: 600px) {
+      .inquiry-form .form-row {
+        grid-template-columns: 1fr;
+      }
     }
 
     footer {
@@ -374,12 +442,73 @@
     <p>
       Lauren Super is currently open to representation, exhibitions, and studio visits by appointment.
     </p>
-    <a class="cta" href="mailto:hello@laurensuper.com?subject=Studio%20Inquiry">Get in touch</a>
+    <form class="inquiry-form" data-form>
+      <input type="hidden" name="access_key" value="REPLACE_WITH_WEB3FORMS_KEY">
+      <input type="hidden" name="subject" value="New inquiry from laurensuper.com">
+      <input type="hidden" name="from_name" value="laurensuper.com">
+      <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+
+      <div class="form-row">
+        <input type="text" name="name" required placeholder="Name">
+        <input type="email" name="email" required placeholder="Email">
+      </div>
+
+      <select name="inquiry_type" required>
+        <option value="">Type of inquiry</option>
+        <option value="Representation">Representation</option>
+        <option value="Exhibition">Exhibition</option>
+        <option value="Press">Press</option>
+        <option value="Studio Visit">Studio Visit</option>
+        <option value="Collector">Collector</option>
+        <option value="Other">Other</option>
+      </select>
+
+      <textarea name="message" required placeholder="Your message"></textarea>
+
+      <button type="submit">Send inquiry</button>
+    </form>
+    <div class="form-status" data-status></div>
   </section>
 
   <footer>
     &copy; 2026 Lauren Super
   </footer>
+
+  <script>
+    document.querySelectorAll('[data-form]').forEach(form => {
+      const status = form.parentElement.querySelector('[data-status]');
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const button = form.querySelector('button');
+        const original = button.textContent;
+        button.textContent = 'Sending…';
+        button.disabled = true;
+        status.textContent = '';
+        status.className = 'form-status';
+        try {
+          const res = await fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            body: new FormData(form)
+          });
+          const data = await res.json();
+          if (data.success) {
+            status.textContent = 'Thank you. Your inquiry has been sent — Lauren will be in touch shortly.';
+            status.className = 'form-status success';
+            form.reset();
+          } else {
+            status.textContent = 'Something went wrong. Please try again or email directly.';
+            status.className = 'form-status error';
+          }
+        } catch {
+          status.textContent = 'Network error. Please try again.';
+          status.className = 'form-status error';
+        } finally {
+          button.textContent = original;
+          button.disabled = false;
+        }
+      });
+    });
+  </script>
 
 </body>
 </html>
