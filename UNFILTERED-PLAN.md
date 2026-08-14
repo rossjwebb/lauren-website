@@ -77,7 +77,7 @@ Today is mid-August 2026: the section launches in "opening soon" state (~3 weeks
 4. Everything else on the page unchanged, pushed down. No other redesign — this version is deliberately literal.
 5. Serve compressed display copies (~1200px wide, < 350KB) linking to the full-res originals.
 
-**Blocker:** the flyer JPGs are not yet in the repo and cannot be extracted from chat. Ross uploads them to the branch (GitHub → Add file → Upload files) as `flyer-invite.jpg` (bunting/invitation side) and `flyer-about.jpg` (QR/about side). If absent at build time: build A and B, create `/preview-c/` as a placeholder page stating it awaits the flyer files, and tell Ross exactly what to upload.
+**Unblocked:** `flyer-invite.jpg` (bunting/invitation side) and `flyer-about.jpg` (QR/about side) are in the repo root on this branch — 1131×1600 progressive JPEGs, ~320KB each, verified visually. Already light enough to serve directly; display copies per §6 are optional for these two.
 
 ### Shared mechanics (all versions)
 
@@ -105,7 +105,8 @@ Flyer photos with **no confirmed repo equivalent** (do not guess-substitute; use
 - Gold-flake resin fish (about side, centre)
 - Blue resin fish cutouts (about side, floating motifs)
 - Lauren's signature graphic
-- The two flyer JPGs themselves (required for Version C): upload as `flyer-invite.jpg`, `flyer-about.jpg`
+
+(The individual photos above can be cropped from the flyer JPGs at reduced quality if truly needed, but prefer omitting them in A/B over using soft crops.)
 
 If Ross uploads any of these (any sensible filename), prefer them in A/B where the flyer features them, and re-check §6 weight limits.
 
