@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lauren Super &mdash; Contemporary Multidisciplinary Artist</title>
+  <meta name="description" content="Unfiltered — a solo exhibition by Lauren Super. Opening Saturday 5 September 2026, 12–6pm at Sonya Winner Rug Studio, 14 York Rise, London NW5 1ST, continuing Monday to Friday 10–6pm until 24 October. Oil painting, hand-carved stone, ceramic, glass and resin installation.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ExhibitionEvent",
+    "name": "Unfiltered — Lauren Super",
+    "startDate": "2026-09-05",
+    "endDate": "2026-10-24",
+    "eventStatus": "https://schema.org/EventScheduled",
+    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+    "isAccessibleForFree": true,
+    "url": "https://laurensuper.com/",
+    "image": "https://laurensuper.com/show-unfiltered.jpg",
+    "description": "A solo exhibition by British multidisciplinary artist Lauren Super, working across oil painting, hand-carved stone, ceramic, glass and resin installation. Opening Saturday 5 September 2026, 12–6pm, to coincide with the 2026 York Rise Street Party.",
+    "location": {
+      "@type": "Place",
+      "name": "Sonya Winner Rug Studio",
+      "url": "https://www.sonyawinner.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "14 York Rise",
+        "addressLocality": "London",
+        "postalCode": "NW5 1ST",
+        "addressCountry": "GB"
+      }
+    },
+    "organizer": {
+      "@type": "Organization",
+      "name": "Sonya Winner Rug Studio",
+      "url": "https://www.sonyawinner.com"
+    },
+    "performer": { "@type": "Person", "name": "Lauren Super" }
+  }
+  </script>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #f5f0eb;
+      --ink: #2c2c2c;
+      --ink-soft: #555;
+      --ink-mute: #888;
+      --rule: #d4cdc3;
+      --accent: #3a3a3a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Georgia', serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ---------- Date-aware states ---------- */
+    /* Hide-only: never restores a display value, so an element's own
+       display rule (inline-block, flex, grid…) always survives. */
+    body[data-show-state="before"] [data-when]:not([data-when~="before"]),
+    body[data-show-state="during"] [data-when]:not([data-when~="during"]),
+    body[data-show-state="after"]  [data-when]:not([data-when~="after"]),
+    body[data-show-state="after"]  [data-when-body] { display: none; }
+
+    /* ---------- Exhibition ribbon ---------- */
+    .show-ribbon {
+      display: block;
+      background: var(--ink);
+      color: #f2ede7;
+      text-decoration: none;
+      text-align: center;
+      padding: 0.75rem 1.2rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      line-height: 1.7;
+      transition: background 0.25s ease;
+    }
+    .show-ribbon:hover { background: #171717; }
+    .show-ribbon .work { font-style: italic; text-transform: none; letter-spacing: 0.12em; font-size: 0.78rem; }
+    .show-ribbon .sep { opacity: 0.45; padding: 0 0.35em; }
+    .show-ribbon .where { color: #b9b0a5; }
+
+    /* ---------- Exhibition section ---------- */
+    .show { padding: 0 1.5rem; scroll-margin-top: 0; }
+    .show-inner { max-width: 1060px; margin: 0 auto; }
+
+    .rule-dotted {
+      border: 0;
+      border-top: 2px dotted var(--rule);
+    }
+
+    .show-eyebrow {
+      margin: 3.2rem 0 1.1rem;
+      text-align: center;
+      font-size: 0.72rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+    }
+
+    .show-title {
+      text-align: center;
+      font-weight: 400;
+      font-size: clamp(2.6rem, 9vw, 5.2rem);
+      line-height: 1.02;
+      letter-spacing: 0.02em;
+      color: var(--accent);
+    }
+    .show-title em { font-style: italic; }
+
+    .show-byline {
+      margin-top: 1rem;
+      text-align: center;
+      font-size: clamp(0.82rem, 2.2vw, 1.02rem);
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+
+    .show-meta {
+      max-width: 680px;
+      margin: 2.6rem auto 0;
+      text-align: center;
+    }
+    .show-meta .key {
+      font-size: 0.86rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink);
+      line-height: 1.9;
+    }
+    .show-meta .sub {
+      margin-top: 0.5rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+      line-height: 1.9;
+    }
+    .show-meta .venue {
+      margin-top: 1.1rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      line-height: 1.9;
+    }
+
+    .show-invite {
+      max-width: 620px;
+      margin: 2rem auto 0;
+      text-align: center;
+      font-style: italic;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: var(--ink-soft);
+    }
+
+    .show-divider {
+      max-width: 200px;
+      margin: 2.8rem auto;
+    }
+
+    .show-about {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .show-about p {
+      font-size: 1.02rem;
+      line-height: 1.8;
+      color: var(--ink-soft);
+      margin-bottom: 1.25rem;
+    }
+    .show-about p:last-child { margin-bottom: 0; }
+
+    /* ---------- Image strip ---------- */
+    .show-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin: 3.2rem 0 0;
+    }
+    .show-strip figure { margin: 0; }
+    .show-strip img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 4px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.14);
+      background: #e8e2da;
+    }
+    .show-strip figcaption {
+      margin-top: 0.7rem;
+      font-size: 0.66rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+      line-height: 1.7;
+    }
+    .show-strip figcaption b { font-weight: 400; color: var(--ink-soft); }
+
+    .show-context {
+      max-width: 680px;
+      margin: 2.8rem auto 0;
+      font-size: 0.92rem;
+      line-height: 1.8;
+      color: var(--ink-mute);
+      text-align: center;
+    }
+
+    /* ---------- Text CTAs ---------- */
+    .show-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.9rem 2.4rem;
+      margin: 2.6rem 0 0;
+    }
+    .show-ctas a {
+      font-size: 0.76rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 0.3rem;
+      transition: border-color 0.25s ease, color 0.25s ease;
+    }
+    .show-ctas a:hover { border-color: var(--ink); }
+    .show-ctas a.quiet { color: var(--ink-mute); }
+    .show-ctas a.quiet:hover { color: var(--ink-soft); }
+
+    .show-foot { margin: 3.2rem 0 0; }
+
+    /* ---------- Past-show line ---------- */
+    .show-past {
+      max-width: 720px;
+      margin: 2.4rem auto;
+      padding: 0 1.5rem;
+      text-align: center;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      color: var(--ink-mute);
+    }
+    .show-past em { font-style: italic; }
+
+    .anchor { display: block; height: 0; scroll-margin-top: 2rem; }
+
+    /* ---------- Header ---------- */
+    header.site {
+      text-align: center;
+      padding: 4.5rem 1.5rem 1.5rem;
+    }
+
+    header.site h1 {
+      font-size: clamp(2.2rem, 5.5vw, 3.4rem);
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+    }
+
+    header.site .tagline {
+      margin-top: 0.6rem;
+      font-size: 0.95rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+    }
+
+    .hero-video {
+      width: 92%;
+      max-width: 960px;
+      margin: 2rem auto 1.5rem;
+      aspect-ratio: 16 / 9;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+      background: #000;
+    }
+
+    .hero-video iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
+    .statement {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 4rem;
+      text-align: center;
+      font-style: italic;
+      font-size: 1.15rem;
+      line-height: 1.7;
+      color: var(--ink-soft);
+    }
+
+    /* ---------- Choice prompt ---------- */
+    .choice-prompt {
+      text-align: center;
+      padding: 1rem 1.5rem 2.5rem;
+    }
+
+    .choice-prompt p {
+      font-size: 0.8rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+    }
+
+    /* ---------- Two-card layout ---------- */
+    .choice-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 1.5rem 5rem;
+    }
+
+    .choice-card {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      border-radius: 14px;
+      box-shadow: 0 14px 50px rgba(0, 0, 0, 0.18);
+      text-decoration: none;
+      color: white;
+      display: block;
+      isolation: isolate;
+      cursor: pointer;
+    }
+
+    .choice-card-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transition: transform 1.2s cubic-bezier(0.22, 0.61, 0.36, 1);
+      z-index: 1;
+    }
+
+    .choice-card:hover .choice-card-bg {
+      transform: scale(1.06);
+    }
+
+    .choice-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.05) 0%,
+        rgba(0, 0, 0, 0.15) 45%,
+        rgba(0, 0, 0, 0.6) 100%
+      );
+      z-index: 2;
+      transition: background 0.5s ease;
+    }
+
+    .choice-card:hover .choice-card-overlay {
+      background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.1) 0%,
+        rgba(0, 0, 0, 0.25) 45%,
+        rgba(0, 0, 0, 0.75) 100%
+      );
+    }
+
+    .choice-card-content {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 2.5rem;
+    }
+
+    .choice-card-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      opacity: 0.85;
+      margin-bottom: 0.8rem;
+    }
+
+    .choice-card h2 {
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      margin-bottom: 1rem;
+    }
+
+    .choice-card p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      opacity: 0.9;
+      max-width: 420px;
+      margin-bottom: 1.5rem;
+    }
+
+    .choice-card-arrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transition: gap 0.3s ease;
+    }
+
+    .choice-card:hover .choice-card-arrow {
+      gap: 1.2rem;
+    }
+
+    .choice-card-arrow::after {
+      content: '→';
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+
+    /* ---------- Inquiries ---------- */
+    section.inquiries {
+      padding: 5rem 1.5rem 4rem;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.03);
+    }
+
+    section.inquiries h2 {
+      font-size: 1.6rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      margin-bottom: 1rem;
+      color: var(--accent);
+    }
+
+    section.inquiries p {
+      max-width: 540px;
+      margin: 0 auto 1.5rem;
+      color: var(--ink-soft);
+    }
+
+    /* ---------- Inquiry form ---------- */
+    .inquiry-form {
+      max-width: 560px;
+      margin: 1.5rem auto 0;
+      text-align: left;
+    }
+
+    .inquiry-form .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.8rem;
+    }
+
+    .inquiry-form input,
+    .inquiry-form select,
+    .inquiry-form textarea {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.6);
+      font-family: 'Georgia', serif;
+      font-size: 1rem;
+      color: var(--ink);
+      margin-bottom: 0.8rem;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .inquiry-form input:focus,
+    .inquiry-form select:focus,
+    .inquiry-form textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    .inquiry-form select {
+      appearance: none;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path fill='%23888' d='M6 8L0 0h12z'/></svg>");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      padding-right: 2.4rem;
+    }
+
+    .inquiry-form textarea {
+      resize: vertical;
+      min-height: 120px;
+      font-family: 'Georgia', serif;
+    }
+
+    .inquiry-form button {
+      background: var(--accent);
+      color: var(--bg);
+      border: 1px solid var(--accent);
+      padding: 0.9rem 2.2rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      cursor: pointer;
+      font-family: inherit;
+      border-radius: 4px;
+      transition: opacity 0.2s;
+      margin-top: 0.4rem;
+    }
+
+    .inquiry-form button:hover { opacity: 0.85; }
+    .inquiry-form button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .form-status {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      text-align: center;
+      min-height: 1.5rem;
+      color: var(--ink-soft);
+    }
+
+    .form-status.success { color: #2d6e3e; }
+    .form-status.error { color: #a83232; }
+
+    @media (max-width: 600px) {
+      .inquiry-form .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.75rem;
+      color: var(--ink-mute);
+      letter-spacing: 0.1em;
+    }
+
+    footer a {
+      color: var(--ink-mute);
+      margin: 0 0.6rem;
+    }
+
+    /* ---------- Tablet ---------- */
+    @media (max-width: 900px) {
+      .choice-grid {
+        gap: 1rem;
+        padding: 0 1rem 4rem;
+      }
+      .choice-card-content {
+        padding: 2rem;
+      }
+      .show-strip { gap: 0.8rem; }
+    }
+
+    /* ---------- Mobile ---------- */
+    @media (max-width: 640px) {
+      header.site { padding: 2.5rem 1rem 0.5rem; }
+      header.site h1 { letter-spacing: 0.08em; }
+      header.site .tagline { font-size: 0.8rem; letter-spacing: 0.15em; }
+
+      .show-ribbon {
+        font-size: 0.6rem;
+        letter-spacing: 0.16em;
+        padding: 0.7rem 1rem;
+      }
+      .show-ribbon .work { font-size: 0.68rem; }
+      .show-ribbon .sep { display: block; height: 0; overflow: hidden; }
+
+      .show { padding: 0 1.25rem; }
+      .show-eyebrow { margin: 2.4rem 0 0.9rem; font-size: 0.66rem; letter-spacing: 0.22em; }
+      .show-byline { letter-spacing: 0.2em; }
+      .show-meta { margin-top: 2rem; }
+      .show-meta .key { font-size: 0.78rem; letter-spacing: 0.1em; }
+      .show-meta .sub,
+      .show-meta .venue { font-size: 0.72rem; letter-spacing: 0.1em; }
+      .show-invite { font-size: 1rem; margin-top: 1.6rem; }
+      .show-divider { margin: 2.2rem auto; }
+      .show-about p { font-size: 0.98rem; line-height: 1.75; }
+
+      .show-strip {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.7rem;
+        margin-top: 2.4rem;
+      }
+      .show-strip figcaption { font-size: 0.6rem; letter-spacing: 0.1em; }
+
+      .show-context { font-size: 0.88rem; margin-top: 2.2rem; }
+      .show-ctas { gap: 1rem 1.6rem; margin-top: 2.2rem; }
+      .show-ctas a { font-size: 0.7rem; letter-spacing: 0.15em; }
+      .show-foot { margin-top: 2.6rem; }
+
+      .hero-video {
+        width: 100%;
+        margin: 1.5rem auto 1rem;
+        border-radius: 0;
+      }
+
+      .statement {
+        font-size: 1rem;
+        line-height: 1.6;
+        padding: 1.5rem 1.5rem 3rem;
+      }
+
+      .choice-prompt { padding: 0.5rem 1.5rem 1.5rem; }
+      .choice-prompt p { font-size: 0.7rem; letter-spacing: 0.25em; }
+
+      .choice-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 0 1rem 3rem;
+      }
+      .choice-card {
+        aspect-ratio: 4 / 5;
+      }
+      .choice-card-content {
+        padding: 1.6rem;
+      }
+      .choice-card h2 {
+        font-size: 2.2rem;
+      }
+      .choice-card p {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+      }
+
+      section.inquiries { padding: 3rem 1rem; }
+    }
+  </style>
+</head>
+<body data-show-state="before">
+
+  <!-- ============ EXHIBITION RIBBON ============ -->
+  <div data-when="before">
+    <a class="show-ribbon" href="#unfiltered">
+      Solo exhibition<span class="sep">·</span><span class="work">‘Unfiltered’</span><span class="sep">·</span>Opens 5 September<span class="sep">·</span><span class="where">Sonya Winner Rug Studio, London NW5</span>
+    </a>
+  </div>
+  <div data-when="during">
+    <a class="show-ribbon" href="#unfiltered">
+      Now on view<span class="sep">·</span><span class="work">‘Unfiltered’</span><span class="sep">·</span>Mon–Fri 10–6 until 24 October<span class="sep">·</span><span class="where">Sonya Winner Rug Studio, London NW5</span>
+    </a>
+  </div>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site">
+    <h1>Lauren Super</h1>
+    <p class="tagline">Contemporary Multidisciplinary Artist</p>
+  </header>
+
+  <!-- ============ EXHIBITION SECTION ============ -->
+  <section class="show" id="unfiltered">
+    <div class="show-inner">
+
+      <div data-when="after">
+        <hr class="rule-dotted">
+        <p class="show-past">
+          <em>Unfiltered</em> was on view September–October 2026 at Sonya Winner Rug Studio.
+        </p>
+        <hr class="rule-dotted">
+      </div>
+
+      <div data-when="before">
+        <hr class="rule-dotted">
+        <p class="show-eyebrow">You are invited to the opening of</p>
+        <h2 class="show-title"><em>‘Unfiltered’</em></h2>
+        <p class="show-byline">by Lauren Super</p>
+
+        <div class="show-meta">
+          <p class="key">Saturday 5th September 12–6pm, to coincide with the 2026 York Rise Street Party</p>
+          <p class="sub">Continues Monday to Friday, 10am–6pm, until 24 October 2026</p>
+          <p class="venue">Sonya Winner Rug Studio &middot; 14 York Rise &middot; London NW5 1ST</p>
+        </div>
+
+        <p class="show-invite">
+          Meet Artist Lauren Super and sample British Wine + Artisan Cheese at the rug showroom during The York Rise Street Party
+        </p>
+      </div>
+
+      <div data-when="during">
+        <hr class="rule-dotted">
+        <p class="show-eyebrow">Now on view</p>
+        <h2 class="show-title"><em>‘Unfiltered’</em></h2>
+        <p class="show-byline">by Lauren Super</p>
+
+        <div class="show-meta">
+          <p class="key">Monday to Friday, 10am–6pm, until 24 October 2026</p>
+          <p class="sub">Opened Saturday 5th September, alongside the 2026 York Rise Street Party</p>
+          <p class="venue">Sonya Winner Rug Studio &middot; 14 York Rise &middot; London NW5 1ST</p>
+        </div>
+      </div>
+
+      <!-- Shared body: about text, works, CTAs (hidden once the show has closed) -->
+      <div class="show-body" data-when-body>
+        <hr class="rule-dotted show-divider">
+
+        <div class="show-about">
+          <p>Lauren Super is a British multidisciplinary artist working across oil painting, hand-carved stone, ceramic, glass and resin installation.</p>
+          <p>Her work explores the tension between natural beauty and the digital masks we wear; and, at its heart, what a filtered, always-observed culture is doing to childhood.</p>
+          <p>It begins in the garden — Super’s botanical paintings: Cape Town sunsets, hibiscus and cosmos set against deep black grounds, made as survival and mindfulness during a difficult time, and stand for a natural beauty the modern world is losing.</p>
+          <p>From there the work darkens and complicates: masks drawn from her African heritage; a teenager’s “goldfish existence” seen through a Snapchat filter; a mother slowly consumed by the fish; the architects of the feed, fishing for the next generation.</p>
+        </div>
+
+        <div class="show-strip">
+          <figure>
+            <img src="/show-bliss.jpg" alt="Bliss — oil painting of a Cape Town sunset over a purple beach" loading="lazy">
+            <figcaption><b>Bliss</b><br>Oil on canvas</figcaption>
+          </figure>
+          <figure>
+            <img src="/show-camo-fish.jpg" alt="Camo Series — oil painting of a goldfish camouflaged among candy on a black ground" loading="lazy" style="object-position: center 45%;">
+            <figcaption><b>Camo Series</b><br>Oil on canvas</figcaption>
+          </figure>
+          <figure>
+            <img src="/show-unfiltered.jpg" alt="Unfiltered — glass sculpture with a painted teenage portrait and strawberry Snapchat mask" loading="lazy">
+            <figcaption><b>Unfiltered</b><br>Glass and oil</figcaption>
+          </figure>
+          <figure>
+            <img src="/show-lauren.jpg" alt="Lauren Super in the studio with The Golden Child, a hand-carved limestone sculpture" loading="lazy" style="object-position: center 22%;">
+            <figcaption><b>The Golden Child</b><br>Hand-carved limestone</figcaption>
+          </figure>
+        </div>
+
+        <p class="show-context" data-when="before">
+          The York Rise Street Party is one of North London’s most-loved neighbourhood festivals — live music, artisan makers,
+          street food and family entertainment. The studio also hosts a pop-up by @goldlightlyjewellery alongside curated
+          ceramics, glass and jewellery by Alice Rose, Jars, Karola Torkos, Tim Rawlinson and more.
+        </p>
+
+        <div class="show-ctas">
+          <a href="#rsvp" data-when="before">RSVP for the opening</a>
+          <a href="#rsvp" data-when="during">Arrange a visit</a>
+          <a href="https://maps.google.com/?q=Sonya+Winner+Rug+Studio,+14+York+Rise,+London+NW5+1ST" target="_blank" rel="noopener">Getting there</a>
+          <a class="quiet" href="https://www.sonyawinner.com" target="_blank" rel="noopener">Presented at Sonya Winner Rug Studio</a>
+        </div>
+
+        <hr class="rule-dotted show-foot">
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ HERO VIDEO ============ -->
+  <div class="hero-video">
+    <iframe
+      src="https://www.youtube.com/embed/UfyhTInjRu8"
+      title="Lauren Super &mdash; Artist Walkthrough"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen
+    ></iframe>
+  </div>
+
+  <!-- ============ ARTIST STATEMENT ============ -->
+  <p class="statement">
+    &ldquo;My work explores the tension between natural beauty and the digital masks we wear in the modern world &mdash;
+    a journey through masking and consumption, always searching for substance in a superficial age.&rdquo;
+  </p>
+
+  <!-- ============ CHOICE PROMPT ============ -->
+  <div class="choice-prompt">
+    <p>Enter the work</p>
+  </div>
+
+  <!-- ============ TWO CARDS ============ -->
+  <div class="choice-grid">
+
+    <!-- PAINTINGS -->
+    <a href="/paintings/" class="choice-card">
+      <div class="choice-card-bg" style="background-image: url('/cosmos.jpg');"></div>
+      <div class="choice-card-overlay"></div>
+      <div class="choice-card-content">
+        <p class="choice-card-eyebrow">Part I</p>
+        <h2>Paintings</h2>
+        <p>
+          Oils on canvas &mdash; from a Cape Town sunset to large-scale studies of botanical beauty and digital camouflage.
+        </p>
+        <span class="choice-card-arrow">Enter</span>
+      </div>
+    </a>
+
+    <!-- SCULPTURE -->
+    <a href="/sculpture/" class="choice-card">
+      <div class="choice-card-bg" style="background-image: url('/mark-2.jpg');"></div>
+      <div class="choice-card-overlay"></div>
+      <div class="choice-card-content">
+        <p class="choice-card-eyebrow">Part II</p>
+        <h2>Sculpture</h2>
+        <p>
+          Limestone, ceramic, glass and resin &mdash; a meditation on masking, motherhood, and the digital feed that
+          swallows the next generation.
+        </p>
+        <span class="choice-card-arrow">Enter</span>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- ============ INQUIRIES ============ -->
+  <span class="anchor" id="rsvp" aria-hidden="true"></span>
+  <section class="inquiries" id="inquiries">
+    <h2>Inquiries</h2>
+    <p>
+      Lauren Super is currently open to representation, exhibitions, and studio visits by appointment.
+    </p>
+    <form class="inquiry-form" data-form>
+      <input type="hidden" name="access_key" value="6150b106-c928-4ad3-97dd-e9adfbdcf676">
+      <input type="hidden" name="subject" value="New inquiry from laurensuper.com">
+      <input type="hidden" name="from_name" value="laurensuper.com">
+      <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+
+      <div class="form-row">
+        <input type="text" name="name" required placeholder="Name">
+        <input type="email" name="email" required placeholder="Email">
+      </div>
+
+      <select name="inquiry_type" required>
+        <option value="">Type of inquiry</option>
+        <option value="Private View RSVP">Private View RSVP &mdash; 5 September</option>
+        <option value="Representation">Representation</option>
+        <option value="Exhibition">Exhibition</option>
+        <option value="Press">Press</option>
+        <option value="Studio Visit">Studio Visit</option>
+        <option value="Collector">Collector</option>
+        <option value="Other">Other</option>
+      </select>
+
+      <textarea name="message" required placeholder="Your message"></textarea>
+
+      <button type="submit">Send inquiry</button>
+    </form>
+    <div class="form-status" data-status></div>
+  </section>
+
+  <footer>
+    &copy; 2026 Lauren Super
+  </footer>
+
+  <script>
+    document.querySelectorAll('[data-form]').forEach(form => {
+      const status = form.parentElement.querySelector('[data-status]');
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const button = form.querySelector('button');
+        const original = button.textContent;
+        button.textContent = 'Sending…';
+        button.disabled = true;
+        status.textContent = '';
+        status.className = 'form-status';
+        try {
+          const res = await fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            body: new FormData(form)
+          });
+          const data = await res.json();
+          if (data.success) {
+            status.textContent = 'Thank you. Your inquiry has been sent — Lauren will be in touch shortly.';
+            status.className = 'form-status success';
+            form.reset();
+          } else {
+            status.textContent = 'Something went wrong. Please try again or email directly.';
+            status.className = 'form-status error';
+          }
+        } catch {
+          status.textContent = 'Network error. Please try again.';
+          status.className = 'form-status error';
+        } finally {
+          button.textContent = original;
+          button.disabled = false;
+        }
+      });
+    });
+  </script>
+
+  <!-- ============ EXHIBITION MECHANICS ============ -->
+  <script>
+    (function () {
+      // --- Date-aware copy states ---
+      var OPENS = new Date(2026, 8, 5);   // Sat 5 September 2026
+      var ENDS  = new Date(2026, 9, 25);  // midnight after Sat 24 October 2026
+      var now   = new Date();
+      var state = now < OPENS ? 'before' : (now < ENDS ? 'during' : 'after');
+
+      document.body.setAttribute('data-show-state', state);
+
+      // --- RSVP preselect ---
+      function preselectRsvp() {
+        if (location.hash.toLowerCase().indexOf('rsvp') === -1) return;
+        var select = document.querySelector('.inquiry-form select[name="inquiry_type"]');
+        if (!select) return;
+        select.value = 'Private View RSVP';
+        select.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+      window.addEventListener('hashchange', preselectRsvp);
+      preselectRsvp();
+    })();
+  </script>
+
+</body>
+</html>
