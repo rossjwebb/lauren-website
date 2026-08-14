@@ -1,0 +1,31 @@
+name: Fetch flyer images
+on:
+  push:
+    paths: ['.github/workflows/fetch-flyers.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    if: github.ref == 'refs/heads/claude/lauren-website-access-tdkl8g'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download flyers from shared Drive links
+        run: |
+          curl -sSL -o flyer-invite.jpg "https://drive.google.com/uc?export=download&id=1KtCRPkb8Bp9WwWGxui2P_ulC7WdAueoH"
+          curl -sSL -o flyer-about.jpg "https://drive.google.com/uc?export=download&id=1hdL_RGgrbPhNd5bFwteFbSTuNWn3ylHB"
+          file flyer-invite.jpg flyer-about.jpg
+          file flyer-invite.jpg | grep -q 'JPEG image data'
+          file flyer-about.jpg | grep -q 'JPEG image data'
+
+      - name: Commit flyers to branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add flyer-invite.jpg flyer-about.jpg
+          git commit -m "Add Unfiltered flyer images (fetched from shared Drive link)"
+          git push
