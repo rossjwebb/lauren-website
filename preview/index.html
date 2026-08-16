@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Lauren Super &mdash; Contemporary Multidisciplinary Artist</title>
+  <meta name="description" content="Unfiltered — a solo exhibition by Lauren Super, contemporary multidisciplinary artist. Opening Saturday 5 September 2026 at Sonya Winner Rug Studio, 14 York Rise, London NW5 1ST, continuing until 24 October.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #f5f0eb;
+      --ink: #2c2c2c;
+      --ink-soft: #555;
+      --ink-mute: #888;
+      --rule: #d4cdc3;
+      --accent: #3a3a3a;
+    }
+
+    body {
+      font-family: 'Georgia', serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ---------- Header ---------- */
+    header.site {
+      text-align: center;
+      padding: 4.5rem 1.5rem 1.5rem;
+    }
+
+    header.site h1 {
+      font-size: clamp(2.2rem, 5.5vw, 3.4rem);
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+    }
+
+    header.site .tagline {
+      margin-top: 0.6rem;
+      font-size: 0.95rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+    }
+
+    .hero-video {
+      width: 92%;
+      max-width: 960px;
+      margin: 2rem auto 1.5rem;
+      aspect-ratio: 16 / 9;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+      background: #000;
+    }
+
+    .hero-video iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
+    .statement {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 4rem;
+      text-align: center;
+      font-style: italic;
+      font-size: 1.15rem;
+      line-height: 1.7;
+      color: var(--ink-soft);
+    }
+
+    /* ---------- Choice prompt ---------- */
+    .choice-prompt {
+      text-align: center;
+      padding: 1rem 1.5rem 2.5rem;
+    }
+
+    .choice-prompt p {
+      font-size: 0.8rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+    }
+
+    /* ---------- Two-card layout ---------- */
+    .choice-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 1.5rem 5rem;
+    }
+
+    .choice-card {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      border-radius: 14px;
+      box-shadow: 0 14px 50px rgba(0, 0, 0, 0.18);
+      text-decoration: none;
+      color: white;
+      display: block;
+      isolation: isolate;
+      cursor: pointer;
+    }
+
+    .choice-card-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transition: transform 1.2s cubic-bezier(0.22, 0.61, 0.36, 1);
+      z-index: 1;
+    }
+
+    .choice-card:hover .choice-card-bg {
+      transform: scale(1.06);
+    }
+
+    .choice-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.05) 0%,
+        rgba(0, 0, 0, 0.15) 45%,
+        rgba(0, 0, 0, 0.6) 100%
+      );
+      z-index: 2;
+      transition: background 0.5s ease;
+    }
+
+    .choice-card:hover .choice-card-overlay {
+      background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.1) 0%,
+        rgba(0, 0, 0, 0.25) 45%,
+        rgba(0, 0, 0, 0.75) 100%
+      );
+    }
+
+    .choice-card-content {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 2.5rem;
+    }
+
+    .choice-card-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      opacity: 0.85;
+      margin-bottom: 0.8rem;
+    }
+
+    .choice-card h2 {
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      margin-bottom: 1rem;
+    }
+
+    .choice-card p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      opacity: 0.9;
+      max-width: 420px;
+      margin-bottom: 1.5rem;
+    }
+
+    .choice-card-arrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transition: gap 0.3s ease;
+    }
+
+    .choice-card:hover .choice-card-arrow {
+      gap: 1.2rem;
+    }
+
+    .choice-card-arrow::after {
+      content: '→';
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+
+    /* ---------- Inquiries ---------- */
+    section.inquiries {
+      padding: 5rem 1.5rem 4rem;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.03);
+    }
+
+    section.inquiries h2 {
+      font-size: 1.6rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      margin-bottom: 1rem;
+      color: var(--accent);
+    }
+
+    section.inquiries p {
+      max-width: 540px;
+      margin: 0 auto 1.5rem;
+      color: var(--ink-soft);
+    }
+
+    /* ---------- Inquiry form ---------- */
+    .inquiry-form {
+      max-width: 560px;
+      margin: 1.5rem auto 0;
+      text-align: left;
+    }
+
+    .inquiry-form .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.8rem;
+    }
+
+    .inquiry-form input,
+    .inquiry-form select,
+    .inquiry-form textarea {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.6);
+      font-family: 'Georgia', serif;
+      font-size: 1rem;
+      color: var(--ink);
+      margin-bottom: 0.8rem;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .inquiry-form input:focus,
+    .inquiry-form select:focus,
+    .inquiry-form textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    .inquiry-form select {
+      appearance: none;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path fill='%23888' d='M6 8L0 0h12z'/></svg>");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      padding-right: 2.4rem;
+    }
+
+    .inquiry-form textarea {
+      resize: vertical;
+      min-height: 120px;
+      font-family: 'Georgia', serif;
+    }
+
+    .inquiry-form button {
+      background: var(--accent);
+      color: var(--bg);
+      border: 1px solid var(--accent);
+      padding: 0.9rem 2.2rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      cursor: pointer;
+      font-family: inherit;
+      border-radius: 4px;
+      transition: opacity 0.2s;
+      margin-top: 0.4rem;
+    }
+
+    .inquiry-form button:hover { opacity: 0.85; }
+    .inquiry-form button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .form-status {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      text-align: center;
+      min-height: 1.5rem;
+      color: var(--ink-soft);
+    }
+
+    .form-status.success { color: #2d6e3e; }
+    .form-status.error { color: #a83232; }
+
+    @media (max-width: 600px) {
+      .inquiry-form .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.75rem;
+      color: var(--ink-mute);
+      letter-spacing: 0.1em;
+    }
+
+    footer a {
+      color: var(--ink-mute);
+      margin: 0 0.6rem;
+    }
+
+    /* ---------- Tablet ---------- */
+    @media (max-width: 900px) {
+      .choice-grid {
+        gap: 1rem;
+        padding: 0 1rem 4rem;
+      }
+      .choice-card-content {
+        padding: 2rem;
+      }
+    }
+
+    /* ---------- Mobile ---------- */
+    @media (max-width: 640px) {
+      header.site { padding: 2.5rem 1rem 0.5rem; }
+      header.site h1 { letter-spacing: 0.08em; }
+      header.site .tagline { font-size: 0.8rem; letter-spacing: 0.15em; }
+
+      .hero-video {
+        width: 100%;
+        margin: 1.5rem auto 1rem;
+        border-radius: 0;
+      }
+
+      .statement {
+        font-size: 1rem;
+        line-height: 1.6;
+        padding: 1.5rem 1.5rem 3rem;
+      }
+
+      .choice-prompt { padding: 0.5rem 1.5rem 1.5rem; }
+      .choice-prompt p { font-size: 0.7rem; letter-spacing: 0.25em; }
+
+      .choice-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 0 1rem 3rem;
+      }
+      .choice-card {
+        aspect-ratio: 4 / 5;
+      }
+      .choice-card-content {
+        padding: 1.6rem;
+      }
+      .choice-card h2 {
+        font-size: 2.2rem;
+      }
+      .choice-card p {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+      }
+
+      section.inquiries { padding: 3rem 1rem; }
+    }
+
+    /* ---------- Unfiltered exhibition banner ---------- */
+    /* Reproduces the 1600x800 banner design; sizes are expressed in cqw so the
+       whole composition scales as one unit, with px fallbacks for browsers
+       without container query units. */
+    .ls-banner-wrap {
+      max-width: 1600px;
+      margin: 0 auto;
+      container-type: inline-size;
+    }
+
+    .ls-banner {
+      width: 100%;
+      aspect-ratio: 2 / 1;
+      background: #FCFAF6;
+      display: flex;
+      font-family: 'EB Garamond', Georgia, serif;
+      color: #1C1B19;
+      overflow: hidden;
+    }
+
+    .ls-left {
+      width: 600px;
+      width: 37.5cqw;
+      padding: 52px 40px 40px 56px;
+      padding: 3.25cqw 2.5cqw 2.5cqw 3.5cqw;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .ls-eyebrow {
+      font-family: 'Lato', Helvetica, Arial, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      font-size: 15.5px;
+      font-size: 0.96875cqw;
+      font-weight: 700;
+      color: #8A6A34;
+    }
+
+    .ls-wm {
+      text-transform: uppercase;
+      letter-spacing: 0.34em;
+      font-size: 20px;
+      font-size: 1.25cqw;
+      font-weight: 500;
+      margin-top: 16px;
+      margin-top: 1cqw;
+    }
+
+    .ls-title {
+      text-transform: uppercase;
+      letter-spacing: 0.155em;
+      font-size: 65px;
+      font-size: 4.0625cqw;
+      font-weight: 500;
+      line-height: 1;
+      margin-top: 6px;
+      margin-top: 0.375cqw;
+    }
+
+    .ls-rule {
+      width: 54px;
+      width: 3.375cqw;
+      height: 2px;
+      height: 0.125cqw;
+      background: #A98545;
+      margin: 18px 0;
+      margin: 1.125cqw 0;
+    }
+
+    .ls-sub {
+      font-style: italic;
+      font-size: 22px;
+      font-size: 1.375cqw;
+      line-height: 1.34;
+      color: #2C2820;
+    }
+
+    .ls-body {
+      font-size: 14.5px;
+      font-size: 0.90625cqw;
+      line-height: 1.5;
+      color: #5C574E;
+      margin-top: 12px;
+      margin-top: 0.75cqw;
+    }
+
+    .ls-body p {
+      margin-bottom: 9px;
+      margin-bottom: 0.5625cqw;
+    }
+
+    .ls-ev {
+      display: flex;
+      align-items: baseline;
+      margin-bottom: 8px;
+      margin-bottom: 0.5cqw;
+    }
+
+    .ls-ev .ls-k {
+      font-family: 'Lato', Helvetica, Arial, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 10px;
+      font-size: 0.625cqw;
+      font-weight: 700;
+      color: #8A6A34;
+      width: 86px;
+      width: 5.375cqw;
+      flex: none;
+      padding-top: 2px;
+      padding-top: 0.125cqw;
+    }
+
+    .ls-ev .ls-v {
+      font-size: 16px;
+      font-size: 1cqw;
+    }
+
+    .ls-credit {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      gap: 0.875cqw;
+      padding-top: 18px;
+      padding-top: 1.125cqw;
+      border-top: 1px solid #E7E1D5;
+    }
+
+    .ls-credit img {
+      width: 66px;
+      width: 4.125cqw;
+      height: 66px;
+      height: 4.125cqw;
+      border-radius: 6px;
+      display: block;
+      box-shadow: 0 2px 7px rgba(28, 27, 25, 0.10);
+    }
+
+    .ls-credit .ls-ctext {
+      font-family: 'Lato', Helvetica, Arial, sans-serif;
+      font-size: 11.5px;
+      font-size: 0.71875cqw;
+      letter-spacing: 0.04em;
+      color: #8F8676;
+      line-height: 1.55;
+    }
+
+    .ls-credit .ls-ctext b { color: #6F6A60; font-weight: 700; }
+
+    .ls-right {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      gap: 1cqw;
+      border-left: 1px solid #EADFC8;
+      padding: 22px;
+      padding: 1.375cqw;
+      min-width: 0;
+    }
+
+    .ls-rtop {
+      height: 536px;
+      height: 33.5cqw;
+      display: grid;
+      grid-template-columns: 2.02fr 1fr;
+      gap: 16px;
+      gap: 1cqw;
+    }
+
+    .ls-rbot {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      gap: 1cqw;
+    }
+
+    .ls-right img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      min-width: 0;
+      border-radius: 3px;
+      box-shadow: 0 2px 9px rgba(28, 27, 25, 0.10);
+    }
+
+    /* Banner reflow — stacked and readable on tablets and phones */
+    @media (max-width: 900px) {
+      .ls-banner {
+        aspect-ratio: auto;
+        flex-direction: column;
+      }
+
+      .ls-left {
+        width: 100%;
+        padding: 2.4rem 1.5rem 2rem;
+        gap: 1.6rem;
+      }
+
+      .ls-eyebrow { font-size: 0.68rem; letter-spacing: 0.2em; }
+      .ls-wm { font-size: 0.95rem; margin-top: 0.9rem; }
+      .ls-title { font-size: clamp(2.1rem, 10vw, 3.2rem); margin-top: 0.3rem; }
+      .ls-rule { width: 54px; height: 2px; margin: 1rem 0; }
+      .ls-sub { font-size: 1.15rem; }
+      .ls-body { font-size: 0.92rem; margin-top: 0.8rem; }
+      .ls-body p { margin-bottom: 0.6rem; }
+
+      .ls-ev { margin-bottom: 0.5rem; }
+      .ls-ev .ls-k { font-size: 0.6rem; width: 5.2rem; padding-top: 0.15rem; }
+      .ls-ev .ls-v { font-size: 0.95rem; }
+
+      .ls-credit { gap: 0.9rem; padding-top: 1.1rem; }
+      .ls-credit img { width: 52px; height: 52px; }
+      .ls-credit .ls-ctext { font-size: 0.7rem; }
+
+      .ls-right {
+        border-left: 0;
+        border-top: 1px solid #EADFC8;
+        padding: 1.2rem 1.5rem 1.6rem;
+        gap: 0.7rem;
+      }
+
+      .ls-rtop { height: 58vw; max-height: 380px; gap: 0.7rem; }
+      .ls-rbot { height: 28vw; max-height: 170px; flex: none; gap: 0.7rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============ UNFILTERED EXHIBITION BANNER ============ -->
+  <div class="ls-banner-wrap">
+    <div class="ls-banner">
+      <div class="ls-left">
+        <div>
+          <div class="ls-eyebrow">An Exhibition &middot; London &middot; 2026</div>
+          <div class="ls-wm">Lauren Super</div>
+          <div class="ls-title">Unfiltered</div>
+          <div class="ls-rule"></div>
+          <p class="ls-sub">Natural beauty and the digital masks we wear.</p>
+          <div class="ls-body">
+            <p>Lauren Super is a British multidisciplinary artist working across oil painting, hand-carved
+            stone, ceramic, glass and resin installation.</p>
+            <p>A body of work that moves from luminous botanical oils to immersive sculpture &mdash; on masking,
+            consumption, and what a filtered, always-observed culture is doing to childhood.</p>
+          </div>
+        </div>
+        <div class="ls-events">
+          <div class="ls-ev"><div class="ls-k">Opening</div><div class="ls-v">Saturday 5 September, 12&ndash;6pm &mdash; meet the artist</div></div>
+          <div class="ls-ev"><div class="ls-k">Through</div><div class="ls-v">Mon&ndash;Fri, 10&ndash;6pm, until 24 October</div></div>
+          <div class="ls-ev"><div class="ls-k">Location</div><div class="ls-v">Sonya Winner Rug Studio, 14 York Rise, London NW5 1ST</div></div>
+        </div>
+        <div class="ls-credit">
+          <img src="/banner-credit-sonya.jpg" alt="Sonya Winner" width="132" height="132">
+          <img src="/banner-credit-rug.jpg" alt="Sonya Winner contemporary rug" width="132" height="132">
+          <div class="ls-ctext">Presented in collaboration with <b>Sonya Winner</b><br>Vibrant Contemporary Rugs &middot; <a href="https://www.sonyawinner.com" style="color:inherit">sonyawinner.com</a></div>
+        </div>
+      </div>
+      <div class="ls-right">
+        <div class="ls-rtop">
+          <img src="/banner-bliss.jpg" alt="Bliss &mdash; oil on canvas, a Cape Town sunset over sea" width="1258" height="1072">
+          <img src="/banner-lauren.jpg" alt="Lauren Super in the studio with a hand-carved limestone sculpture" width="622" height="1072">
+        </div>
+        <div class="ls-rbot">
+          <img src="/banner-fish-blue.jpg" alt="Blue resin fish sculpture" width="616" height="408" loading="lazy">
+          <img src="/banner-fish-gold.jpg" alt="Gold-flake resin fish sculpture" width="616" height="408" loading="lazy">
+          <img src="/banner-fish-clear.jpg" alt="Clear resin fish sculpture with colour inclusions" width="616" height="408" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site">
+    <h1>Lauren Super</h1>
+    <p class="tagline">Contemporary Multidisciplinary Artist</p>
+  </header>
+
+  <!-- ============ HERO VIDEO ============ -->
+  <div class="hero-video">
+    <iframe
+      src="https://www.youtube.com/embed/UfyhTInjRu8"
+      title="Lauren Super &mdash; Artist Walkthrough"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen
+    ></iframe>
+  </div>
+
+  <!-- ============ ARTIST STATEMENT ============ -->
+  <p class="statement">
+    &ldquo;My work explores the tension between natural beauty and the digital masks we wear in the modern world &mdash;
+    a journey through masking and consumption, always searching for substance in a superficial age.&rdquo;
+  </p>
+
+  <!-- ============ CHOICE PROMPT ============ -->
+  <div class="choice-prompt">
+    <p>Enter the work</p>
+  </div>
+
+  <!-- ============ TWO CARDS ============ -->
+  <div class="choice-grid">
+
+    <!-- PAINTINGS -->
+    <a href="/paintings/" class="choice-card">
+      <div class="choice-card-bg" style="background-image: url('/cosmos.jpg');"></div>
+      <div class="choice-card-overlay"></div>
+      <div class="choice-card-content">
+        <p class="choice-card-eyebrow">Part I</p>
+        <h2>Paintings</h2>
+        <p>
+          Oils on canvas &mdash; from a Cape Town sunset to large-scale studies of botanical beauty and digital camouflage.
+        </p>
+        <span class="choice-card-arrow">Enter</span>
+      </div>
+    </a>
+
+    <!-- SCULPTURE -->
+    <a href="/sculpture/" class="choice-card">
+      <div class="choice-card-bg" style="background-image: url('/mark-2.jpg');"></div>
+      <div class="choice-card-overlay"></div>
+      <div class="choice-card-content">
+        <p class="choice-card-eyebrow">Part II</p>
+        <h2>Sculpture</h2>
+        <p>
+          Limestone, ceramic, glass and resin &mdash; a meditation on masking, motherhood, and the digital feed that
+          swallows the next generation.
+        </p>
+        <span class="choice-card-arrow">Enter</span>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- ============ INQUIRIES ============ -->
+  <section class="inquiries">
+    <h2>Inquiries</h2>
+    <p>
+      Lauren Super is currently open to representation, exhibitions, and studio visits by appointment.
+    </p>
+    <form class="inquiry-form" data-form>
+      <input type="hidden" name="access_key" value="6150b106-c928-4ad3-97dd-e9adfbdcf676">
+      <input type="hidden" name="subject" value="New inquiry from laurensuper.com">
+      <input type="hidden" name="from_name" value="laurensuper.com">
+      <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+
+      <div class="form-row">
+        <input type="text" name="name" required placeholder="Name">
+        <input type="email" name="email" required placeholder="Email">
+      </div>
+
+      <select name="inquiry_type" required>
+        <option value="">Type of inquiry</option>
+        <option value="Representation">Representation</option>
+        <option value="Exhibition">Exhibition</option>
+        <option value="Press">Press</option>
+        <option value="Studio Visit">Studio Visit</option>
+        <option value="Collector">Collector</option>
+        <option value="Other">Other</option>
+      </select>
+
+      <textarea name="message" required placeholder="Your message"></textarea>
+
+      <button type="submit">Send inquiry</button>
+    </form>
+    <div class="form-status" data-status></div>
+  </section>
+
+  <footer>
+    &copy; 2026 Lauren Super
+  </footer>
+
+  <script>
+    document.querySelectorAll('[data-form]').forEach(form => {
+      const status = form.parentElement.querySelector('[data-status]');
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const button = form.querySelector('button');
+        const original = button.textContent;
+        button.textContent = 'Sending…';
+        button.disabled = true;
+        status.textContent = '';
+        status.className = 'form-status';
+        try {
+          const res = await fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            body: new FormData(form)
+          });
+          const data = await res.json();
+          if (data.success) {
+            status.textContent = 'Thank you. Your inquiry has been sent — Lauren will be in touch shortly.';
+            status.className = 'form-status success';
+            form.reset();
+          } else {
+            status.textContent = 'Something went wrong. Please try again or email directly.';
+            status.className = 'form-status error';
+          }
+        } catch {
+          status.textContent = 'Network error. Please try again.';
+          status.className = 'form-status error';
+        } finally {
+          button.textContent = original;
+          button.disabled = false;
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
