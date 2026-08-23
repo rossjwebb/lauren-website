@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Unfiltered · Lauren Super</title>
+<meta name="description" content="Unfiltered, a solo exhibition by Lauren Super. Opening Saturday 5 September 2026 at Sonya Winner Rug Studio, 14 York Rise, London NW5 1ST, continuing until 24 October.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230B0A09'/><circle cx='16' cy='16' r='7' fill='%23FF6A52'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="scrollcraft.css">
+<style>
+  :root {
+    --sc-canvas:     #F2ECE4;
+    --sc-surface:    #E4DDD1;
+    --sc-ink:        #17140F;
+    --sc-ink-soft:   #554E44;
+    --sc-accent:     #B23A26;
+    --sc-accent-ink: #F2ECE4;
+    --sc-font-display: "EB Garamond", Georgia, serif;
+    --sc-font-text:    "EB Garamond", Georgia, serif;
+    --sc-measure: 60ch;
+  }
+
+  /* ---- chapter grounds. Hard cuts, never interpolated: a cut is not a
+         gradient, which is the whole point of a chaptered page. ---- */
+  .ch { position: relative; }
+  .ch--paper { background: #F2ECE4; }
+  .ch--dark,
+  .ch--void { background: #0B0A09; }
+  .ch--bone  { background: #E4DDD1; }
+  .ch--cold  { background: #D7D3CC; }
+
+  .ch--dark, .ch--void {
+    --sc-ink: #F4EDE3; --sc-ink-soft: #ABA093; --sc-accent: #FF6A52;
+    --sc-hairline: rgba(244,237,227,.16);
+    color: var(--sc-ink);
+  }
+  .ch--paper, .ch--bone, .ch--cold {
+    --sc-ink: #17140F; --sc-ink-soft: #554E44; --sc-accent: #B23A26;
+    --sc-hairline: rgba(23,20,15,.18);
+    color: var(--sc-ink);
+  }
+  /* Light type on a dark ground needs compensating on three axes. */
+  .ch--dark, .ch--void { --leading-body: 1.72; --track-body: .006em; }
+  .ch--dark .body, .ch--void .body { line-height: var(--leading-body); letter-spacing: var(--track-body); }
+
+  body { background: #0B0A09; font-family: var(--sc-font-text); }
+
+  .wrap { width: min(100% - (var(--sc-gutter) * 2), 76rem); margin-inline: auto; }
+  .body { font-size: var(--sc-t-base); line-height: 1.65; color: var(--sc-ink-soft);
+          max-width: var(--sc-measure); text-wrap: pretty; }
+  .body + .body { margin-top: 1.1em; }
+  h1, h2, h3 { font-weight: 500; text-wrap: balance; letter-spacing: var(--sc-track-tight);
+               line-height: 1.02; color: var(--sc-ink); }
+
+  /* ---- the folio: this page's chrome. No bar, no wordmark-and-CTA. ---- */
+  .folio {
+    position: fixed; z-index: var(--sc-z-chrome); left: var(--sc-gutter); bottom: var(--sc-4);
+    font-family: "Lato", system-ui, sans-serif; font-size: .68rem; letter-spacing: .18em;
+    text-transform: uppercase; display: flex; flex-direction: column; gap: .55rem;
+    mix-blend-mode: difference; color: #b9b2a8;
+  }
+  .folio a { color: inherit; text-decoration: none; opacity: .38; transition: opacity 160ms var(--sc-ease-out); }
+  .folio a:hover { opacity: .9; }
+  .folio a[aria-current="true"] { opacity: 1; color: #fff; }
+  .folio__count { opacity: .5; letter-spacing: .12em; font-size: .62rem; }
+  .folio a:focus-visible { outline: 2px solid var(--sc-accent); outline-offset: 3px; opacity: 1; }
+  .folio.is-done { opacity: 0; pointer-events: none; }
+  .folio { transition: opacity 320ms var(--sc-ease-out); }
+  @media (max-width: 860px) { .folio { display: none; } }
+
+  /* ---- 0 · title page. Type on paper. No media above the fold. ---- */
+  .title { min-height: 96svh; display: grid; align-content: center; padding-block: var(--sc-9); }
+  .title__mast { font-family: "Lato", system-ui, sans-serif; font-size: .7rem; letter-spacing: .24em;
+                 text-transform: uppercase; color: var(--sc-ink-soft); }
+  .title h1 { font-size: clamp(4rem, 17vw, 15rem); line-height: .84; margin-top: var(--sc-6);
+              letter-spacing: -0.01em; }
+  .title__artist { font-size: clamp(1.1rem, 2.6vw, 1.9rem); letter-spacing: .2em; text-transform: uppercase;
+                   margin-top: var(--sc-5); color: var(--sc-ink); }
+  .title__meta { margin-top: var(--sc-7); display: grid; gap: .3rem; font-size: var(--sc-t-sm);
+                 color: var(--sc-ink-soft); }
+  .title__rule { height: 1px; background: var(--sc-hairline); margin-top: var(--sc-6); }
+
+  /* ---- chapter openers ---- */
+  .chap { padding-block: var(--sc-9) var(--sc-7); }
+  .chap__no { font-family: "Lato", system-ui, sans-serif; font-size: .68rem; letter-spacing: .26em;
+              text-transform: uppercase; color: var(--sc-accent); }
+  .chap h2 { font-size: clamp(2.4rem, 6vw, 5rem); margin-top: var(--sc-4); }
+  .chap .body { margin-top: var(--sc-5); }
+
+  /* ---- media columns. Media never bleeds under type in this grammar. ---- */
+  .spread { display: grid; gap: var(--sc-7); padding-bottom: var(--sc-9); align-items: start; }
+  @media (min-width: 900px) {
+    .spread--a { grid-template-columns: 2.1fr .85fr; }
+    .spread--b { grid-template-columns: 1fr 1.5fr; }
+    .spread__pull { padding-top: var(--sc-8); }
+  }
+  figure { margin: 0; }
+  figure img { display: block; width: 100%; height: auto; }
+  .plate { position: relative; overflow: hidden; }
+  .plate img { box-shadow: 0 18px 44px -20px rgba(0,0,0,.62); }
+  figcaption { margin-top: var(--sc-3); font-family: "Lato", system-ui, sans-serif;
+               font-size: .68rem; letter-spacing: .13em; text-transform: uppercase;
+               color: var(--sc-ink-soft); line-height: 1.6; }
+  figcaption b { font-weight: 700; color: var(--sc-ink); letter-spacing: .1em; }
+
+  /* ---- II · the rail. Objects walked past, labelled as specimens. ---- */
+  .rail { display: flex; gap: var(--sc-6); align-items: end; padding-inline: var(--sc-gutter);
+          will-change: transform; }
+  .rail__lead { flex: none; width: min(34rem, 78vw); padding-right: var(--sc-6); }
+  .rail__obj  { flex: none; width: clamp(15rem, 25vw, 23rem); }
+  .rail__obj img { aspect-ratio: 4 / 5; object-fit: cover; }
+  .rail__note { flex: none; width: min(24rem, 70vw); align-self: center; }
+  @media (prefers-reduced-motion: no-preference) {
+    .rail__obj { opacity: calc(.55 + var(--sc-p, 0) * .9); }
+  }
+
+  /* ---- silence. Authored, not left over. ---- */
+  .silence { min-height: 46svh; display: grid; place-items: center; padding-inline: var(--sc-gutter); }
+  .silence p { font-size: clamp(1.3rem, 3.4vw, 2.5rem); font-style: italic; color: #6c645a;
+               text-align: center; max-width: 24ch; line-height: 1.35; }
+
+  /* ---- III · the tank. The peak: the largest thing on the page. ---- */
+  .tank { display: grid; place-items: center; padding: var(--sc-5) var(--sc-gutter); height: 100%; }
+  .tank__inner { display: grid; gap: var(--sc-6); align-items: center; width: min(100%, 88rem); }
+  @media (min-width: 900px) { .tank__inner { grid-template-columns: 1.9fr .8fr; } }
+  .tank__fig { position: relative; }
+  .tank__base { width: 100%; height: 82svh; object-fit: contain; opacity: .5; }
+  .tank__top  { position: absolute; inset: 0; width: 100%; height: 82svh; object-fit: contain; }
+  .tank__fig figcaption { position: absolute; right: 0; left: auto; bottom: -2.4rem; text-align: right; }
+  @media (max-width: 899px) {
+    .tank__base, .tank__top { height: 46svh; }
+    .tank__fig figcaption { position: static; margin-top: var(--sc-3); }
+  }
+  .tank__copy p { font-size: clamp(1.05rem, 1.9vw, 1.5rem); line-height: 1.5; color: var(--sc-ink);
+                  max-width: 30ch; }
+  .tank__copy p + p { margin-top: var(--sc-5); }
+  .tank__copy em { font-style: italic; color: var(--sc-accent); }
+
+  /* ---- IV · the feed. The one scrub chapter. Clip in its own column. ---- */
+  .feed { display: grid; place-items: center; padding: var(--sc-6) var(--sc-gutter); height: 100%; }
+  .feed__inner { display: grid; gap: var(--sc-7); align-items: center; width: min(100%, 80rem); }
+  @media (min-width: 900px) { .feed__inner { grid-template-columns: 1.4fr .9fr; } }
+  .feed__frame { position: relative; aspect-ratio: 16 / 10; overflow: hidden;
+                 box-shadow: 0 20px 50px -26px rgba(0,0,0,.55); }
+  .feed__copy { max-width: 36ch; }
+  .feed__copy h2 { font-size: clamp(1.8rem, 3.6vw, 3rem); margin-top: var(--sc-4); }
+  .feed__copy p { margin-top: var(--sc-4); color: var(--sc-ink-soft); font-size: var(--sc-t-base); line-height: 1.6; }
+  .feed__cap { font-family: "Lato", system-ui, sans-serif; font-size: .66rem; letter-spacing: .13em;
+               text-transform: uppercase; margin-top: var(--sc-5) !important; line-height: 1.6; }
+  .feed__cap b { color: var(--sc-ink); }
+  @media (max-width: 899px) { .feed__frame { aspect-ratio: 4 / 3; } }
+
+  /* ---- 5 · colophon ---- */
+  .colo { padding-block: var(--sc-9); }
+  .colo__grid { display: grid; gap: var(--sc-7); }
+  @media (min-width: 900px) { .colo__grid { grid-template-columns: 1fr 1fr; align-items: start; } }
+  .colo dl { display: grid; grid-template-columns: 7rem 1fr; gap: .5rem var(--sc-4);
+             font-size: var(--sc-t-sm); }
+  .colo dt { font-family: "Lato", system-ui, sans-serif; font-size: .64rem; letter-spacing: .16em;
+             text-transform: uppercase; color: var(--sc-accent); padding-top: .28em; }
+  .colo dd { margin: 0; color: var(--sc-ink); }
+  .colo__reply { margin-top: var(--sc-7); font-size: clamp(1.15rem, 2.2vw, 1.6rem);
+                 line-height: 1.5; max-width: 40ch; color: var(--sc-ink); }
+  .colo__reply a { color: var(--sc-accent); text-underline-offset: .18em; text-decoration-thickness: 1px; }
+  .colo__reply a:focus-visible { outline: 2px solid var(--sc-accent); outline-offset: 3px; }
+  .colo__foot { margin-top: var(--sc-8); padding-top: var(--sc-4); border-top: 1px solid var(--sc-hairline);
+                font-family: "Lato", system-ui, sans-serif; font-size: .64rem; letter-spacing: .14em;
+                text-transform: uppercase; color: var(--sc-ink-soft); display: flex; gap: var(--sc-5);
+                flex-wrap: wrap; }
+  .colo__foot a { color: inherit; }
+
+  /* ---- the viewer's plate: the last face ---- */
+  .mirror { position: relative; aspect-ratio: 4 / 5; background: #E4DDD1;
+            border: 1px solid var(--sc-hairline); display: grid; place-items: center; overflow: hidden; }
+  .mirror__silhouette { width: 46%; aspect-ratio: 3 / 4; border-radius: 46% 46% 40% 40%;
+                        background: radial-gradient(60% 55% at 50% 38%, #d8d1c5 0%, #cfc7b9 62%, #c9c0b1 100%); }
+  .mirror__line { margin-top: var(--sc-4); font-size: var(--sc-t-base); color: var(--sc-ink);
+                  opacity: 0; transform: translateY(6px);
+                  transition: opacity 420ms var(--sc-ease-out), transform 420ms var(--sc-ease-out); }
+  .mirror__line.is-on { opacity: 1; transform: none; }
+
+  /* ---- the signature move: the travelling filter ---- */
+  .face { position: absolute; pointer-events: none; }
+  .face::after {
+    content: ""; position: absolute; inset: -6%; border-radius: 50%;
+    border: 1px solid var(--sc-accent); opacity: 0;
+    transition: opacity 500ms var(--sc-ease-out);
+  }
+  .face.is-claimed::after { opacity: .55; }
+
+  .filter {
+    position: fixed; top: 0; left: 0; z-index: 60; width: 128px; aspect-ratio: 1;
+    pointer-events: none; opacity: 0; will-change: transform;
+    transition: opacity 500ms var(--sc-ease-out);
+    background: url("assets/filter.png") center / contain no-repeat;
+    filter: drop-shadow(0 10px 22px rgba(0,0,0,.4));
+  }
+  .filter.is-on { opacity: .94; }
+  .filter.is-locked { opacity: 1; }
+  @media (prefers-reduced-motion: reduce) { .filter { transition: opacity 1ms; } }
+
+  /* ---- phones: step the hero down, drop desktop air ---- */
+  @media (max-width: 700px) {
+    .title h1 { font-size: clamp(3rem, 20vw, 5rem); }
+    .chap { padding-block: var(--sc-8) var(--sc-6); }
+    .spread { gap: var(--sc-6); padding-bottom: var(--sc-8); }
+    .tank__fig img { max-height: 56svh; }
+  }
+</style>
+</head>
+<body>
+
+<span data-sc-progress></span>
+<div class="sc-grain" aria-hidden="true"></div>
+
+<nav class="folio" aria-label="Chapters">
+  <a href="#garden">I Garden</a>
+  <a href="#masks">II Masks</a>
+  <a href="#tank">III Tank</a>
+  <a href="#feed">IV Feed</a>
+  <span class="folio__count" data-count hidden></span>
+</nav>
+
+<main id="top">
+
+  <!-- 0 · TITLE PAGE. Composure. Paper, type, no media. -->
+  <section class="ch ch--paper" data-sc-act="flow">
+    <div class="wrap title">
+      <p class="title__mast">Sonya Winner Rug Studio · London · 2026</p>
+      <h1>Unfiltered</h1>
+      <p class="title__artist">Lauren Super</p>
+      <div class="title__rule"></div>
+      <div class="title__meta">
+        <p>Opening Saturday 5 September, 12 to 6pm. Meet the artist.</p>
+        <p>Then Monday to Friday, 10 to 6pm, until 24 October.</p>
+        <p>14 York Rise, London NW5 1ST.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- I · THE GARDEN. Wonder. Reveal and parallax inside media columns. -->
+  <section class="ch ch--dark" id="garden" data-sc-act="flow">
+    <div class="wrap chap">
+      <p class="chap__no">Chapter one</p>
+      <h2>It begins in the garden.</h2>
+      <p class="body" data-sc-in data-sc-stagger="60">
+        Botanical paintings: Cape Town sunsets, hibiscus and cosmos set against deep black grounds,
+        made as survival and mindfulness during a difficult time. They stand for a natural beauty
+        the modern world is losing.
+      </p>
+    </div>
+
+    <div class="wrap spread spread--a">
+      <figure class="plate" data-sc-reveal="up" data-sc-reveal-at="0.06 0.30">
+        <img src="assets/bliss.jpg" width="1600" height="900" alt="A painted Cape Town sunset, orange sky over blue and violet bands of sea.">
+        <figcaption><b>Bliss</b><br>Oil on canvas</figcaption>
+      </figure>
+      <figure class="plate spread__pull" data-sc-reveal="up" data-sc-reveal-at="0.16 0.42" data-sc-parallax="-0.6">
+        <img src="assets/hibiscus-purple.jpg" width="1387" height="931" alt="A purple hibiscus painted against a near black ground.">
+        <figcaption><b>Hibiscus</b><br>Oil on canvas</figcaption>
+      </figure>
+    </div>
+
+    <div class="wrap spread spread--b">
+      <figure class="plate" data-sc-reveal="up" data-sc-reveal-at="0.34 0.58" data-sc-parallax="0.4">
+        <img src="assets/peony.jpg" width="717" height="893" alt="A deep red peony opening against black.">
+        <figcaption><b>Peony</b><br>Oil on canvas</figcaption>
+      </figure>
+      <figure class="plate" data-sc-reveal="left" data-sc-reveal-at="0.44 0.72">
+        <img src="assets/cosmos.jpg" width="1600" height="1051" alt="A white cosmos flower painted across the face of a girl, hiding everything but her eyes.">
+        <span class="face" data-face="cosmos" style="left:14%; top:16%; width:15%; aspect-ratio:1;"></span>
+        <figcaption><b>Cosmos</b><br>Oil on canvas. The first face in the show, already behind something.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- II · THE MASKS. Unease. Lateral travel, specimen labels. -->
+  <section class="ch ch--bone" id="masks" data-sc-act="pan" data-sc-span="2.4">
+    <div data-sc-stage>
+      <div class="rail" data-sc-pan="0.05">
+        <div class="rail__lead">
+          <p class="chap__no">Chapter two</p>
+          <h2>Then it darkens.</h2>
+          <p class="body" style="margin-top:1.4rem">
+            Masks drawn from her African heritage. Carved by hand, in stone and ceramic,
+            and set down here the way a collection sets down its specimens.
+          </p>
+        </div>
+
+        <figure class="rail__obj">
+          <img src="assets/leroy-bust.jpg" width="1100" height="1390" alt="A carved stone head, eyes lowered, resting on a wooden plinth.">
+          <span class="face" data-face="leroy" style="left:30%; top:20%; width:40%; aspect-ratio:1;"></span>
+          <figcaption><b>Leroy</b><br>Hand carved stone</figcaption>
+        </figure>
+
+        <figure class="rail__obj">
+          <img src="assets/leroy.jpg" width="1100" height="825" alt="A close view of the same carved face, lit so the stone reads as metal.">
+          <figcaption><b>Leroy, detail</b><br>Hand carved stone</figcaption>
+        </figure>
+
+        <figure class="rail__obj">
+          <img src="assets/seed-1.jpg" width="963" height="1060" alt="A white stone egg with a mother and child carved into its hollow.">
+          <figcaption><b>Seed</b><br>Hand carved limestone</figcaption>
+        </figure>
+
+        <figure class="rail__obj">
+          <img src="assets/smother.jpg" width="1080" height="1303" alt="Two small gilded figures on a dark turning table, one leaning over the other.">
+          <figcaption><b>Smother</b><br>Ceramic and gold leaf</figcaption>
+        </figure>
+
+        <figure class="rail__obj">
+          <img src="assets/milk-splat.jpg" width="1100" height="825" alt="A clear resin fish dissolving into a white ceramic pool.">
+          <figcaption><b>Milk</b><br>Resin and ceramic</figcaption>
+        </figure>
+
+        <div class="rail__note">
+          <p class="body">A mother slowly consumed by the fish.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SILENCE. Authored. The peak needs something to arrive from. -->
+  <section class="ch ch--void" data-sc-act="flow">
+    <div class="silence">
+      <p>From there the work complicates.</p>
+    </div>
+  </section>
+
+  <!-- III · THE TANK. The peak. Implication. Largest span on the page. -->
+  <section class="ch ch--dark" id="tank" data-sc-act="pin" data-sc-span="3.8">
+    <div data-sc-stage>
+      <div class="tank">
+      <div class="tank__inner">
+        <!-- The wide view is the ground, present before the act's own progress
+             leaves 0, so the entry slide is never an empty stage. The iris then
+             closes on the frontal view: a lens shutting on her face. -->
+        <figure class="tank__fig">
+          <img class="tank__base" src="assets/unfiltered-side.jpg" width="1600" height="1445" alt="A glass tank seen from the side, the painted panes edge on.">
+          <img class="tank__top" src="assets/unfiltered.jpg" width="1600" height="1415" data-sc-reveal="iris" data-sc-reveal-at="0.16 0.42" alt="A glass tank. Painted on one pane, a teenage girl smiles out; on the pane beside her, a strawberry mask with cut eyes and a cut mouth.">
+          <span class="face" data-face="girl" style="left:29%; top:34%; width:16%; aspect-ratio:1;"></span>
+          <figcaption><b>Unfiltered</b><br>Oil on glass. The work the exhibition is named after.</figcaption>
+        </figure>
+        <div class="tank__copy">
+          <p data-sc-cue="0.02 0.40 0.10 0.28">A teenager's <em>goldfish existence</em>, seen through a Snapchat filter.</p>
+          <p data-sc-cue="0.32 0.72 0.10 0.28">Three seconds of memory, and a face that is never quite her own.</p>
+          <p data-sc-cue="0.64 1 0.10 0.20">The mask is painted on the pane in front of her, so you cannot look at her without it.</p>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- IV · THE FEED. Chill. The one scrub chapter on the page.
+       The clip sits in its own column with a caption: in this grammar media
+       never bleeds under type, so the frame is positioned and the engine's
+       absolute video resolves against it rather than the whole stage. -->
+  <section class="ch ch--cold" id="feed" data-sc-act="scrub" data-sc-span="2" data-sc-dwell="0.42">
+    <div data-sc-stage>
+      <div class="feed">
+      <div class="feed__inner">
+        <figure class="feed__frame">
+          <img class="sc-stage__poster" src="assets/turn-poster.webp" alt="">
+          <video data-sc-scrub data-sc-src="assets/turn.mp4" data-sc-src-mobile="assets/turn-m.mp4" muted playsinline></video>
+        </figure>
+        <div class="feed__copy" data-sc-cue="0.08 1">
+          <p class="chap__no">Chapter four</p>
+          <h2 data-sc-kinetic="lines">The architects of the feed.</h2>
+          <p>Fishing for the next generation. Cast in clear resin, with the sweets still set into it, and turning under your hand like something on a slab.</p>
+          <p class="feed__cap"><b>Analogy</b><br>Resin, pigment and found confectionery</p>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · COLOPHON. Resolve. Small type, CTA as running text. -->
+  <section class="ch ch--paper" id="colophon" data-sc-act="flow">
+    <div class="wrap colo">
+      <div class="colo__grid">
+        <div>
+          <h2 style="font-size:clamp(1.6rem,3vw,2.4rem)">Unfiltered</h2>
+          <dl style="margin-top:2rem">
+            <dt>Opening</dt><dd>Saturday 5 September, 12 to 6pm, with the artist present.</dd>
+            <dt>Then</dt><dd>Monday to Friday, 10 to 6pm, until 24 October 2026.</dd>
+            <dt>Where</dt><dd>Sonya Winner Rug Studio, 14 York Rise, London NW5 1ST.</dd>
+            <dt>Works</dt><dd>Oil on canvas, hand carved stone, ceramic, glass and resin.</dd>
+          </dl>
+          <p class="colo__reply">
+            The opening falls on the day of the York Rise Street Party, so the studio will be busy and
+            the wine will be British. If you would like to come, <a href="https://www.laurensuper.com/#inquiries">reply to the invitation</a>.
+          </p>
+        </div>
+
+        <div>
+          <figure>
+            <div class="mirror">
+              <div class="mirror__silhouette"></div>
+              <span class="face" data-face="you" style="left:33%; top:30%; width:34%; aspect-ratio:1;"></span>
+            </div>
+            <figcaption><b>Visitor</b><br>Unfiltered, 2026</figcaption>
+          </figure>
+          <p class="mirror__line" data-mirror-line>The last face it found was yours.</p>
+        </div>
+      </div>
+
+      <div class="colo__foot">
+        <span>Lauren Super</span>
+        <a href="https://www.laurensuper.com/">laurensuper.com</a>
+        <a href="https://www.sonyawinner.com">Presented with Sonya Winner</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div class="filter" data-filter aria-hidden="true"></div>
+
+<script src="scrollcraft.js"></script>
+<script>
+/* Pick the codec before mounting. The clip ships twice: H.264 for Safari and
+   iOS, VP9 for everything else. Chromium builds without the h264 decoder
+   otherwise fail silently and sit on the poster, which looks identical to a
+   working page in a screenshot. Attributes only, engine untouched. */
+(function () {
+  var probe = document.createElement('video');
+  if (probe.canPlayType('video/mp4; codecs="avc1.640028"')) return;
+  if (!probe.canPlayType('video/webm; codecs="vp9"')) return;
+  Array.prototype.forEach.call(document.querySelectorAll('[data-sc-src]'), function (v) {
+    ['data-sc-src', 'data-sc-src-mobile'].forEach(function (a) {
+      var s = v.getAttribute(a);
+      if (s) v.setAttribute(a, s.replace(/\.mp4$/, '.webm'));
+    });
+  });
+})();
+
+ScrollCraft.mount(document.body);
+
+/* ------------------------------------------------------------------
+   Signature move: the travelling filter.
+
+   The strawberry mask painted on the front pane of the tank comes off
+   the artwork and follows the reader down the page, snapping onto every
+   face it passes and leaving each one ringed. The last face on the page
+   is the reader's own.
+
+   Pointer-driven where there is a fine pointer, scroll-driven everywhere
+   else, so the meaning survives on a phone rather than being a desktop
+   flourish. Engine untouched.
+------------------------------------------------------------------- */
+(function () {
+  var filter  = document.querySelector('[data-filter]');
+  var faces   = Array.prototype.slice.call(document.querySelectorAll('[data-face]'));
+  var counter = document.querySelector('[data-count]');
+  var line    = document.querySelector('[data-mirror-line]');
+  if (!filter || !faces.length) return;
+
+  var fine    = matchMedia('(hover: hover) and (pointer: fine)').matches;
+  var calm    = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var claimed = 0;
+
+  var cur  = { x: innerWidth / 2, y: innerHeight / 2, s: 1 };
+  var goal = { x: innerWidth / 2, y: innerHeight / 2, s: 1 };
+  var BASE = 128;
+
+  function centre(el) {
+    var r = el.getBoundingClientRect();
+    return { x: r.left + r.width / 2, y: r.top + r.height / 2, w: r.width, on: r.bottom > 0 && r.top < innerHeight };
+  }
+
+  function claim(el) {
+    if (el.classList.contains('is-claimed')) return;
+    el.classList.add('is-claimed');
+    claimed++;
+    if (counter) {
+      counter.hidden = false;
+      counter.textContent = claimed + ' of ' + faces.length + ' faces filtered';
+    }
+    if (el.getAttribute('data-face') === 'you' && line) line.classList.add('is-on');
+  }
+
+  /* Nearest face to a point, but only one that is actually on screen and
+     within reach. Reach scales with the face so a big head does not need
+     the same precision as a small one. */
+  function nearest(px, py) {
+    var best = null, bestD = Infinity;
+    for (var i = 0; i < faces.length; i++) {
+      var c = centre(faces[i]);
+      if (!c.on || !c.w) continue;
+      var d = Math.hypot(c.x - px, c.y - py);
+      var reach = Math.max(c.w * 1.5, 150);
+      if (d < reach && d < bestD) { bestD = d; best = { el: faces[i], c: c }; }
+    }
+    return best;
+  }
+
+  if (fine && !calm) {
+    addEventListener('pointermove', function (e) {
+      filter.classList.add('is-on');
+      var hit = nearest(e.clientX, e.clientY);
+      if (hit) {
+        goal.x = hit.c.x; goal.y = hit.c.y;
+        goal.s = (hit.c.w * 1.28) / BASE;
+        filter.classList.add('is-locked');
+        claim(hit.el);
+      } else {
+        goal.x = e.clientX; goal.y = e.clientY; goal.s = 1;
+        filter.classList.remove('is-locked');
+      }
+    }, { passive: true });
+
+    addEventListener('pointerleave', function () { filter.classList.remove('is-on'); });
+
+    (function loop() {
+      cur.x += (goal.x - cur.x) * 0.16;
+      cur.y += (goal.y - cur.y) * 0.16;
+      cur.s += (goal.s - cur.s) * 0.12;
+      filter.style.transform =
+        'translate3d(' + (cur.x - BASE / 2).toFixed(1) + 'px,' + (cur.y - BASE / 2).toFixed(1) + 'px,0) scale(' + cur.s.toFixed(3) + ')';
+      requestAnimationFrame(loop);
+    })();
+
+  } else {
+    /* No fine pointer, or reduced motion: the filter rides the scroll and
+       settles on whichever face is nearest the middle of the screen. */
+    var settle = function () {
+      var hit = nearest(innerWidth / 2, innerHeight * 0.5);
+      if (!hit) { filter.classList.remove('is-on'); return; }
+      filter.classList.add('is-on', 'is-locked');
+      var s = (hit.c.w * 1.28) / BASE;
+      filter.style.transform =
+        'translate3d(' + (hit.c.x - BASE / 2).toFixed(1) + 'px,' + (hit.c.y - BASE / 2).toFixed(1) + 'px,0) scale(' + s.toFixed(3) + ')';
+      claim(hit.el);
+    };
+    addEventListener('scroll', settle, { passive: true });
+    addEventListener('resize', settle);
+    settle();
+  }
+})();
+
+/* The folio steps aside over the colophon, where the footer already carries
+   the marks and the chapters are behind the reader. */
+(function () {
+  var folio = document.querySelector('.folio');
+  var colo  = document.querySelector('#colophon');
+  if (!folio || !colo || !('IntersectionObserver' in window)) return;
+  new IntersectionObserver(function (es) {
+    folio.classList.toggle('is-done', es[0].isIntersecting);
+  }, { rootMargin: '-55% 0px 0px 0px' }).observe(colo);
+})();
+
+/* Folio: mark the chapter the reader is in. */
+(function () {
+  var links = Array.prototype.slice.call(document.querySelectorAll('.folio a'));
+  var secs  = links.map(function (a) { return document.querySelector(a.getAttribute('href')); });
+  if (!('IntersectionObserver' in window)) return;
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      var i = secs.indexOf(en.target);
+      if (i < 0) return;
+      if (en.isIntersecting) {
+        links.forEach(function (l) { l.removeAttribute('aria-current'); });
+        links[i].setAttribute('aria-current', 'true');
+      }
+    });
+  }, { rootMargin: '-45% 0px -45% 0px' });
+  secs.forEach(function (s) { if (s) io.observe(s); });
+})();
+</script>
+</body>
+</html>
