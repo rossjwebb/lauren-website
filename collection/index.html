@@ -511,21 +511,10 @@
   
 
     /* ---------- Collection grid: landscape works, uncropped ---------- */
-    .tray-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.2rem;
-      max-width: 1000px;
-      margin: 1.5rem auto 0;
-    }
-    .tray-grid img {
-      width: 100%;
+    /* Landscape works: show them whole rather than cropped to 4:5 */
+    .piece .image-pair img {
+      aspect-ratio: auto;
       height: auto;
-      display: block;
-      border-radius: 10px;
-      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
-      cursor: zoom-in;
-      background: var(--bg-card);
     }
 
     .about-artist {
@@ -548,7 +537,6 @@
     .about-artist p { color: var(--ink-soft); }
     @media (max-width: 700px) {
       .about-artist { grid-template-columns: 1fr; gap: 1.2rem; text-align: center; }
-      .tray-grid { gap: 1rem; }
     }
   </style>
 </head>
@@ -575,11 +563,12 @@
   <!-- Hero -->
   <article class="piece">
     <div class="feature-image">
-      <img src="/collection-hero.jpg" alt="Four resin trays from the Unfiltered Collection on a lit white sideboard, a pink resin bust on a plinth beside them and a layered colour rug on the wall behind" loading="eager" onclick="openLightbox(this)">
+      <img src="/collection-hero.jpg" alt="Four resin trays from the Unfiltered Collection in a row on a lit white sideboard, a layered colour rug on the wall behind" loading="eager" onclick="openLightbox(this)">
     </div>
     <p class="narrative" style="margin-top: 1.6rem;">
-      Shown at the Sonya Winner Rug Studio. Poured, layered and set in clear acrylic, each tray holds a
-      horizon of its own &mdash; sunset reds over deep water, ice blues breaking into black.
+      Poured, layered and set in clear acrylic, each tray holds a horizon of its own &mdash; sunset reds
+      over black surf, an amber sky breaking into white spray, ice blue running through cream and dark
+      veining.
     </p>
   </article>
 
@@ -591,13 +580,11 @@
     <p class="narrative">
       Four pieces, no two alike. The resin is worked while it is still moving, so the colour finds its own
       edges and no pour can be repeated. Each sits in clear acrylic with brass handles, made to be used
-      rather than kept behind glass.
+      rather than kept behind glass. Shown here at the Sonya Winner Rug Studio.
     </p>
-    <div class="tray-grid">
-      <img src="/tray-1.jpg" alt="Resin tray: crimson and orange sunset over black and teal surf" loading="lazy" onclick="openLightbox(this)">
-      <img src="/tray-2.jpg" alt="Resin tray: amber horizon with white spray breaking over dark water" loading="lazy" onclick="openLightbox(this)">
-      <img src="/tray-3.jpg" alt="Resin tray: magenta and orange bands over violet and blue swells" loading="lazy" onclick="openLightbox(this)">
-      <img src="/tray-4.jpg" alt="Resin tray: ice blue, cream and black veining, like water under light" loading="lazy" onclick="openLightbox(this)">
+    <div class="image-pair" style="max-width: 1000px;">
+      <img src="/collection-studio.jpg" alt="The collection on a lit sideboard at the rug studio, a pink resin bust on a plinth alongside" loading="lazy" onclick="openLightbox(this)">
+      <img src="/collection-detail.jpg" alt="A single tray in ice blue, cream and black, resting on a shelf" loading="lazy" onclick="openLightbox(this)">
     </div>
   </article>
 
