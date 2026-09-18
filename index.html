@@ -5,6 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lauren Super &mdash; Contemporary Multidisciplinary Artist</title>
   <meta name="description" content="Unfiltered — a solo exhibition by Lauren Super, contemporary multidisciplinary artist. Opening Saturday 5 September 2026 at Sonya Winner Rug Studio, 14 York Rise, London NW5 1ST, continuing until 24 October.">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <meta name="theme-color" content="#f5f0eb">
+  <link rel="canonical" href="https://www.laurensuper.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Lauren Super">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:url" content="https://www.laurensuper.com/">
+  <meta property="og:title" content="Lauren Super &mdash; Contemporary Multidisciplinary Artist">
+  <meta property="og:description" content="Unfiltered — a solo exhibition by Lauren Super, contemporary multidisciplinary artist. Opening Saturday 5 September 2026 at Sonya Winner Rug Studio, 14 York Rise, London NW5 1ST, continuing until 24 October.">
+  <meta property="og:image" content="https://www.laurensuper.com/og-home.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Work by Lauren Super">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lauren Super &mdash; Contemporary Multidisciplinary Artist">
+  <meta name="twitter:description" content="Unfiltered — a solo exhibition by Lauren Super, contemporary multidisciplinary artist. Opening Saturday 5 September 2026 at Sonya Winner Rug Studio, 14 York Rise, London NW5 1ST, continuing until 24 October.">
+  <meta name="twitter:image" content="https://www.laurensuper.com/og-home.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Lato:wght@400;700&display=swap" rel="stylesheet">
@@ -604,9 +624,48 @@
       .ls-rtop { height: 58vw; max-height: 380px; gap: 0.7rem; }
       .ls-rbot { height: 28vw; max-height: 170px; flex: none; gap: 0.7rem; }
     }
+
+    /* ---------- Show bar: status and one action, always above the fold ---------- */
+    .showbar {
+      background: var(--ink);
+      color: var(--bg);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: center;
+      gap: 0.35rem 1.4rem;
+      padding: 0.72rem 1.2rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      text-align: center;
+    }
+    .showbar__where { opacity: 0.6; }
+    .showbar a {
+      color: var(--bg);
+      text-decoration: underline;
+      text-underline-offset: 0.25em;
+      text-decoration-thickness: 1px;
+      transition: opacity 0.18s ease;
+    }
+    .showbar a:hover { opacity: 0.7; }
+    .showbar a:focus-visible { outline: 2px solid var(--bg); outline-offset: 3px; }
+    @media (max-width: 640px) {
+      .showbar { font-size: 0.62rem; letter-spacing: 0.12em; gap: 0.3rem 1rem; padding: 0.6rem 0.9rem; }
+      .showbar__where { display: none; }
+    }
   </style>
 </head>
 <body>
+
+
+  <!-- ============ SHOW BAR ============ -->
+  <div class="showbar">
+    <span data-show-status>Now on view, Monday to Friday, 10 to 6, until 24 October</span>
+    <span class="showbar__where">Sonya Winner Rug Studio, London NW5</span>
+    <a href="#inquiries">Enquire</a>
+    <a href="https://maps.google.com/?q=Sonya+Winner+Rug+Studio,+14+York+Rise,+London+NW5+1ST" target="_blank" rel="noopener">Getting there</a>
+  </div>
 
   <!-- ============ UNFILTERED EXHIBITION BANNER ============ -->
   <div class="ls-banner-wrap">
@@ -712,7 +771,7 @@
   </div>
 
   <!-- ============ INQUIRIES ============ -->
-  <section class="inquiries">
+  <section class="inquiries" id="inquiries">
     <h2>Inquiries</h2>
     <p>
       Lauren Super is currently open to representation, exhibitions, and studio visits by appointment.
@@ -785,5 +844,20 @@
     });
   </script>
 
+
+  <script>
+    // The bar carries the one action on the page that is above the fold, so it
+    // stays after the show closes; only the status line changes.
+    (function () {
+      var el = document.querySelector('[data-show-status]');
+      if (!el) return;
+      var now = new Date();
+      var opens  = new Date('2026-09-05T00:00:00');
+      var closes = new Date('2026-10-24T23:59:59');
+      if (now < opens)       el.textContent = 'Unfiltered opens Saturday 5 September, 12 to 6pm';
+      else if (now > closes) el.textContent = 'Studio visits and enquiries by appointment';
+    })();
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>

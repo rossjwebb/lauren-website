@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page not found &mdash; Lauren Super</title>
+  <meta name="description" content="That page could not be found. Return to the work of Lauren Super, contemporary multidisciplinary artist.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <meta name="theme-color" content="#f5f0eb">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #f5f0eb;
+      --ink: #2c2c2c;
+      --ink-soft: #555;
+      --ink-mute: #888;
+      --rule: #d4cdc3;
+      --accent: #3a3a3a;
+    }
+
+    body {
+      font-family: 'Georgia', serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    main {
+      flex: 1;
+      display: grid;
+      place-content: center;
+      text-align: center;
+      padding: 4rem 1.5rem;
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--ink-mute);
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+    }
+
+    p.lede {
+      color: var(--ink-soft);
+      font-style: italic;
+      font-size: 1.05rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .divider { width: 60px; height: 1px; background: var(--rule); margin: 0 auto 2.5rem; }
+
+    nav.links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.8rem 2rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    nav.links a {
+      color: var(--ink-soft);
+      text-decoration: none;
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 0.2rem;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    nav.links a:hover { color: var(--accent); border-color: var(--accent); }
+    nav.links a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.75rem;
+      color: var(--ink-mute);
+      letter-spacing: 0.1em;
+    }
+  </style>
+</head>
+<body>
+
+  <main>
+    <p class="eyebrow">Error 404</p>
+    <h1>This page could not be found</h1>
+    <p class="lede">
+      The page you were looking for has moved, or never existed. The work is all still here.
+    </p>
+    <div class="divider"></div>
+    <nav class="links">
+      <a href="/">Home</a>
+      <a href="/paintings/">Paintings</a>
+      <a href="/sculpture/">Sculpture</a>
+      <a href="/#inquiries">Enquire</a>
+    </nav>
+  </main>
+
+  <footer>&copy; 2026 Lauren Super</footer>
+
+  <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
